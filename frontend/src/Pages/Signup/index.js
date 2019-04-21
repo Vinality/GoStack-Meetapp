@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import logomeetapp from "../../logo.svg";
 import { Container } from "./styles";
-
+import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Creators as SignupActions } from "../../store/ducks/signup";
@@ -67,8 +67,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch =>
   bindActionCreators({ ...SignupActions }, dispatch);
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Signup);
-
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Signup)
+);

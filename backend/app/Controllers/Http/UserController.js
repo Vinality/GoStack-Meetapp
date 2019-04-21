@@ -34,8 +34,6 @@ class UserController {
     user.devops = data.devops;
     user.firstAccess = false;
 
-    console.log(user);
-
     await user.save();
   }
 }

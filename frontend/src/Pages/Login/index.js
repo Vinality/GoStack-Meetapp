@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import logomeetapp from "../../logo.svg";
 import { Container } from "./styles";
-import { Redirect } from 'react-router-dom';
-
 import { connect } from "react-redux";
+import { withRouter } from 'react-router-dom'
 import { bindActionCreators } from "redux";
 import { Creators as UsersActions } from "../../store/ducks/user";
 
@@ -25,7 +24,6 @@ class Login extends Component {
   };
 
   render() {
-    if (this.props.data) return <Redirect to="/dashboard" />;
 
     return (
       <Container>
@@ -56,7 +54,9 @@ class Login extends Component {
 const mapStateToProps = state => ({
   error: state.user.error,
   data: state.user.data,
-  errorMessage: state.user.errorMessage
+  errorMessage: state.user.errorMessage,
+  firstAccess: state.user.firstAccess,
+  login: state.user.login
 });
 
 const mapDispatchToProps = dispatch =>

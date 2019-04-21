@@ -25,13 +25,12 @@ export const Container = styled.div`
     margin-left: 580px;
 
     input {
-      /* background: #ffffff; */
       background-color: #241c2d;
       color: #ffffff;
       border: 0;
-      height: 44px;
       padding: 0 15px;
       font-size: 14px;
+      height: 44px;
     }
 
     button {
