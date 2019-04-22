@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import logomeetapp from "../../logo.svg";
 import { Container } from "./styles";
-import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import { Creators as SignupActions } from "../../store/ducks/signup";
 
@@ -23,6 +23,11 @@ class Signup extends Component {
     const { UserSignupRequest } = this.props;
 
     UserSignupRequest(username, email, password);
+  };
+
+  handleClick = e => {
+    e.preventDefault();
+    this.props.history.push("/");
   };
 
   render() {
@@ -51,7 +56,10 @@ class Signup extends Component {
             placeholder="Digite sua senha"
           />
           <button type="submit">Cadastrar</button>
-          <a href="/">Já tenho conta</a>
+          {/* <a href="#a" onClick={this.handleClick}>
+            Já tenho conta
+          </a> */}
+          <Link to='/'>Já tenho conta</Link>
         </form>
       </Container>
     );
@@ -67,9 +75,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch =>
   bindActionCreators({ ...SignupActions }, dispatch);
 
-export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(Signup)
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Signup);

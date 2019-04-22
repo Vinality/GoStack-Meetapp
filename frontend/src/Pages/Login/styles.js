@@ -48,11 +48,12 @@ export const Container = styled.div`
     button:hover {
       background: rgb(249, 116, 138);
     }
-
-    a {
-      margin-top: 15px;
-      margin-left: 80px;
-      color: #fff;
-    }
   }
+    a {
+      margin-left: 660px;
+      margin-top: 15px;
+      color: #fff;
+      cursor: pointer;
+      width: 150px;
+    }
 `;

@@ -1,12 +1,30 @@
-import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import React, { Component } from "react";
+import Header from '../../Components/Header';
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { Creators as UsersActions } from "../../store/ducks/user";
 
 // import { Container } from './styles';
 
 class Dashboard extends Component {
   render() {
-    return <div><h1>Hello World</h1></div>;
+    return (
+      <div>
+        <Header />
+        <h1>Hello World</h1>
+      </div>
+    );
   }
 }
 
-export default withRouter(Dashboard);
+const mapStateToProps = state => ({
+  data: state.user.data,
+});
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ ...UsersActions }, dispatch);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Dashboard);

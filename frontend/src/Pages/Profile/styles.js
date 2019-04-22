@@ -4,10 +4,19 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-top: 250px;
-
+  margin-top: 50px;
+  margin-left: 40px;
+  
+  p {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    color: #e22476;
+  }
+  
   form {
     margin: 20px 0 0;
+    font-size: 16px;
     width: 100%;
     max-width: 280px;
     color: #fff;
@@ -18,13 +27,21 @@ export const Container = styled.div`
     margin-left: 580px;
 
     input {
-      /* background: #ffffff; */
       background-color: #241c2d;
       color: #ffffff;
       border: 0;
-      height: 44px;
       padding: 0 15px;
       font-size: 14px;
+      height: 20px;
+      margin: 20px;
+    }
+
+    input.textinput {
+      margin-left: -15px;
+    }
+
+    label.check {
+      margin: -15px;
     }
 
     button {
@@ -42,12 +59,12 @@ export const Container = styled.div`
     button:hover {
       background: rgb(249, 116, 138);
     }
-
-    a {
-      margin-top: 15px;
-      margin-left: 90px;
-      color: #fff;
-      cursor: pointer;
-    }
+  }
+  a {
+    margin-left: 660px;
+    margin-top: 15px;
+    color: #fff;
+    cursor: pointer;
+    width: 150px;
   }
 `;

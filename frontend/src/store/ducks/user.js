@@ -2,9 +2,12 @@ export const Types = {
   LOGIN_REQUEST: "users/LOGIN_REQUEST",
   LOGIN_SUCCESS: "users/LOGIN_SUCCESS",
   LOGIN_FAILURE: "users/LOGIN_FAILURE",
-  UPDATE_REQUEST: "users/UPDATE_REQUEST",
-  UPDATE_SUCCESS: "users/UPDATE_SUCCESS",
-  UPDATE_FAILURE: "users/UPDATE_FAILURE"
+  UPDATE_PREFERENCES_REQUEST: "users/UPDATE_PREFERENCES_REQUEST",
+  UPDATE_PREFERENCES_SUCCESS: "users/UPDATE_PREFERENCES_SUCCESS",
+  UPDATE_PREFERENCES_FAILURE: "users/UPDATE_PREFERENCES_FAILURE",
+  UPDATE_PROFILE_REQUEST: "users/UPDATE_PROFILE_REQUEST",
+  UPDATE_PROFILE_SUCCESS: "users/UPDATE_PROFILE_SUCCESS",
+  UPDATE_PROFILE_FAILURE: "users/UPDATE_PROFILE_FAILURE"
 };
 
 const INITIAL_STATE = {
@@ -12,8 +15,7 @@ const INITIAL_STATE = {
   preferences: {},
   error: false,
   firstAccess: true,
-  errorMessage: "",
-  login: false
+  errorMessage: ""
 };
 
 export default function users(state = INITIAL_STATE, action) {
@@ -26,8 +28,7 @@ export default function users(state = INITIAL_STATE, action) {
       return {
         data: action.payload.data,
         error: false,
-        firstAccess: action.payload.data.firstAccess,
-        login: true
+        firstAccess: action.payload.data.firstAccess
       };
     case Types.LOGIN_FAILURE:
       return {
@@ -35,17 +36,38 @@ export default function users(state = INITIAL_STATE, action) {
         error: true,
         errorMessage: action.payload.error
       };
-    case Types.UPDATE_REQUEST:
+    case Types.UPDATE_PREFERENCES_REQUEST:
       return {
         ...state
       };
-    case Types.UPDATE_SUCCESS:
+    case Types.UPDATE_PREFERENCES_SUCCESS:
       return {
+        ...state,
         preferences: action.payload.data,
         error: false,
-        firstAccess: false,
+        firstAccess: false
       };
-    case Types.UPDATE_FAILURE:
+    case Types.UPDATE_PREFERENCES_FAILURE:
+      return {
+        ...state,
+        error: true,
+        errorMessage: action.payload.error
+      };
+    case Types.UPDATE_PROFILE_REQUEST:
+      return {
+        ...state
+      };
+    case Types.UPDATE_PROFILE_SUCCESS:
+      return {
+        ...state,
+        data: {
+          username: action.payload.data.username,
+          token: action.payload.data.token
+        },
+        preferences: action.payload.data,
+        error: false
+      };
+    case Types.UPDATE_PROFILE_FAILURE:
       return {
         ...state,
         error: true,
@@ -72,8 +94,16 @@ export const Creators = {
     payload: { error }
   }),
 
-  UserUpdateRequest: (back, front, mobile, devops, gestao, marketing, token) => ({
-    type: Types.UPDATE_REQUEST,
+  UserUpdatePreferencesRequest: (
+    back,
+    front,
+    mobile,
+    devops,
+    gestao,
+    marketing,
+    token
+  ) => ({
+    type: Types.UPDATE_PREFERENCES_REQUEST,
     payload: {
       back,
       front,
@@ -85,13 +115,48 @@ export const Creators = {
     }
   }),
 
-  UserUpdateSuccess: data => ({
-    type: Types.UPDATE_SUCCESS,
+  UserUpdatePreferencesSuccess: data => ({
+    type: Types.UPDATE_PREFERENCES_SUCCESS,
     payload: { data }
   }),
 
-  UserUpdateFailure: error => ({
-    type: Types.UPDATE_FAILURE,
+  UserUpdatePreferencesFailure: error => ({
+    type: Types.UPDATE_PREFERENCES_FAILURE,
+    payload: { error }
+  }),
+
+  UserUpdateProfileRequest: (
+    back,
+    front,
+    mobile,
+    devops,
+    gestao,
+    marketing,
+    token,
+    username,
+    password
+  ) => ({
+    type: Types.UPDATE_PROFILE_REQUEST,
+    payload: {
+      back,
+      front,
+      mobile,
+      devops,
+      gestao,
+      marketing,
+      token,
+      username,
+      password
+    }
+  }),
+
+  UserUpdateProfileSuccess: data => ({
+    type: Types.UPDATE_PROFILE_SUCCESS,
+    payload: { data }
+  }),
+
+  UserUpdateProfileFailure: error => ({
+    type: Types.UPDATE_PROFILE_FAILURE,
     payload: { error }
   })
 };

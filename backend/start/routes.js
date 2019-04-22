@@ -25,7 +25,8 @@ Route.post("/files", "FileController.store");
 
 Route.group(() => {
   Route.get("/files/:id", "FileController.show");
-  Route.put("/firstaccess", "UserController.update");
+  Route.put("/firstaccess", "UserController.setPreferences");
+  Route.put("/users/update", "UserController.update");
   Route.resource("meetups", "MeetupController").apiOnly();
   Route.post("/joinmeetup", "JoinMeetupController.store");
   Route.get("/joinmeetup/:id", "JoinMeetupController.index");

@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import logomeetapp from "../../logo.svg";
 import { Container } from "./styles";
 import { connect } from "react-redux";
-import { withRouter } from 'react-router-dom'
 import { bindActionCreators } from "redux";
+import { Link } from "react-router-dom";
 import { Creators as UsersActions } from "../../store/ducks/user";
 
 class Login extends Component {
@@ -15,6 +15,11 @@ class Login extends Component {
   handleUser = e => this.setState({ username: e.target.value });
   handlePass = e => this.setState({ password: e.target.value });
 
+  handleClick = e => {
+    e.preventDefault();
+    this.props.history.push("/signup");
+  };
+
   handleSubmit = e => {
     e.preventDefault();
     const { username, password } = this.state;
@@ -24,7 +29,6 @@ class Login extends Component {
   };
 
   render() {
-
     return (
       <Container>
         <img src={logomeetapp} alt="Meetapp" />
@@ -44,8 +48,11 @@ class Login extends Component {
             placeholder="Digite sua senha"
           />
           <button type="submit">Entrar</button>
-          <a href="/signup">Criar conta grátis</a>
         </form>
+        {/* <a href="#a" onClick={this.handleClick} className="signup">
+          Criar conta grátis
+        </a> */}
+        <Link to='/signup'>Criar conta grátis</Link>
       </Container>
     );
   }
@@ -55,8 +62,7 @@ const mapStateToProps = state => ({
   error: state.user.error,
   data: state.user.data,
   errorMessage: state.user.errorMessage,
-  firstAccess: state.user.firstAccess,
-  login: state.user.login
+  firstAccess: state.user.firstAccess
 });
 
 const mapDispatchToProps = dispatch =>
