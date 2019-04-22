@@ -22,6 +22,7 @@ Technologies used:
 ## Progress
 - [x] Login
 - [x] Signup
+- [x] First Access Page
 - [x] Profile Updating
 - [ ] New Meetup
 - [ ] Meetup Page
