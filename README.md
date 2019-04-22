@@ -18,3 +18,13 @@ Technologies used:
 * Redux for state management.
 * Redux Saga for asynchronous side-effects management.
 * Styled Components (self explanatory).
+
+## Progress
+- [x] Login
+- [x] Signup
+- [x] Profile Updating
+- [ ] New Meetup
+- [ ] Meetup Page
+- [ ] Subscribed Meetup List
+- [ ] Recommended Meetup List
+- [ ] Search for Meetup
