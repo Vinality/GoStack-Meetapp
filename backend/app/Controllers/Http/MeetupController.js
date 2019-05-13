@@ -3,6 +3,7 @@
 
 const Meetup = use("App/Models/Meetup");
 const User = use("App/Models/User");
+const File = use("App/Models/File");
 const moment = require("moment");
 
 /**
@@ -24,7 +25,6 @@ class MeetupController {
       "location",
       "when",
       "file",
-      "file_id",
       "front",
       "back",
       "mobile",
@@ -33,7 +33,10 @@ class MeetupController {
       "marketing"
     ]);
 
-    const meetup = Meetup.create({ ...data, user_id: auth.jwtPayload.uid });
+    console.log(data.file);
+    const fileData = await File.findBy('file', data.file);
+
+    const meetup = await Meetup.create({ ...data, user_id: auth.jwtPayload.uid, file_id: fileData.id });
 
     return meetup;
   }

@@ -87,7 +87,7 @@ class Profile extends Component {
   checkGestao = () => {
     this.setState({ gestao: !this.state.gestao });
   };
-  checkMarketing = () => {
+  checkMarketing = () => {  
     this.setState({ marketing: !this.state.marketing });
   };
 

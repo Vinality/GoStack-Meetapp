@@ -56,9 +56,6 @@ class Signup extends Component {
             placeholder="Digite sua senha"
           />
           <button type="submit">Cadastrar</button>
-          {/* <a href="#a" onClick={this.handleClick}>
-            Já tenho conta
-          </a> */}
           <Link to='/'>Já tenho conta</Link>
         </form>
       </Container>

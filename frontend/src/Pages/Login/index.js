@@ -49,9 +49,6 @@ class Login extends Component {
           />
           <button type="submit">Entrar</button>
         </form>
-        {/* <a href="#a" onClick={this.handleClick} className="signup">
-          Criar conta grátis
-        </a> */}
         <Link to='/signup'>Criar conta grátis</Link>
       </Container>
     );
