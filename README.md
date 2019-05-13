@@ -24,8 +24,10 @@ Technologies used:
 - [x] Signup
 - [x] First Access Page
 - [x] Profile Updating
-- [ ] New Meetup
+- [x] New Meetup
 - [ ] Meetup Page
 - [ ] Subscribed Meetup List
 - [ ] Recommended Meetup List
 - [ ] Search for Meetup
+- [ ] Prop-Types Validation
+- [ ] Unit and Integration Tests
