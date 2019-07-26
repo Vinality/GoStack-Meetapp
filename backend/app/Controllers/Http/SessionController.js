@@ -1,5 +1,4 @@
-"use strict";
-
+/* eslint-disable class-methods-use-this */
 const User = use('App/Models/User');
 
 class SessionController {
@@ -8,7 +7,11 @@ class SessionController {
     const token = await auth.attempt(email, password);
     const user = await User.findBy('email', email);
 
-    return {auth: token, username: user.username, email: user.email, firstAccess: user.firstAccess};
+    return {
+      auth: token,
+      username: user.username,
+      email: user.email,
+    };
   }
 }
 

@@ -1,7 +1,5 @@
-"use strict";
-
 /** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
-const Model = use("Model");
+const Model = use('Model');
 
 class JoinMeetup extends Model {
   static boot() {
@@ -10,11 +8,11 @@ class JoinMeetup extends Model {
   }
 
   user() {
-    return this.hasOne("App/Models/User");
+    return this.hasOne('App/Models/User', 'user_id', 'id');
   }
 
   meetup() {
-    return this.hasOne("App/Models/Meetup");
+    return this.hasOne('App/Models/Meetup', 'meetup_id', 'id');
   }
 }
 

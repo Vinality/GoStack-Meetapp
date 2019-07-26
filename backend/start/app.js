@@ -1,4 +1,4 @@
-"use strict";
+
 
 /*
 |--------------------------------------------------------------------------
@@ -11,15 +11,16 @@
 |
 */
 const providers = [
-  "@adonisjs/framework/providers/AppProvider",
-  "@adonisjs/auth/providers/AuthProvider",
-  "@adonisjs/bodyparser/providers/BodyParserProvider",
-  "@adonisjs/cors/providers/CorsProvider",
-  "@adonisjs/lucid/providers/LucidProvider",
-  "@adonisjs/mail/providers/MailProvider",
-  "adonis-kue/providers/KueProvider",
-  "@adonisjs/redis/providers/RedisProvider",
-  "@adonisjs/framework/providers/ViewProvider"
+  '@adonisjs/framework/providers/AppProvider',
+  '@adonisjs/auth/providers/AuthProvider',
+  '@adonisjs/bodyparser/providers/BodyParserProvider',
+  '@adonisjs/cors/providers/CorsProvider',
+  '@adonisjs/lucid/providers/LucidProvider',
+  '@adonisjs/mail/providers/MailProvider',
+  'adonis-kue/providers/KueProvider',
+  '@adonisjs/redis/providers/RedisProvider',
+  '@adonisjs/framework/providers/ViewProvider',
+  'adonis-lucid-filter/providers/LucidFilterProvider',
 ];
 
 /*
@@ -32,8 +33,8 @@ const providers = [
 |
 */
 const aceProviders = [
-  "@adonisjs/lucid/providers/MigrationsProvider",
-  "adonis-kue/providers/CommandsProvider"
+  '@adonisjs/lucid/providers/MigrationsProvider',
+  'adonis-kue/providers/CommandsProvider',
 ];
 
 /*
@@ -68,6 +69,8 @@ const commands = [];
 | Here you store queue jobs for your package
 |
 */
-const jobs = ["App/Jobs/NewMeetupJoin"];
+const jobs = ['App/Jobs/NewMeetupJoin'];
 
-module.exports = { providers, aceProviders, aliases, commands, jobs };
+module.exports = {
+  providers, aceProviders, aliases, commands, jobs,
+};

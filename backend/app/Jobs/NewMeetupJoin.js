@@ -1,6 +1,5 @@
-"use strict";
-
-const Mail = use("Mail");
+/* eslint-disable class-methods-use-this */
+const Mail = use('Mail');
 
 class NewMeetupJoin {
   // If this getter isn't provided, it will default to 1.
@@ -11,25 +10,26 @@ class NewMeetupJoin {
 
   // This is required. This is a unique key used to identify this job.
   static get key() {
-    return "NewMeetupJoin-job";
+    return 'NewMeetupJoin-job';
   }
 
   // This is where the work is done.
-  async handle({ username, title, when, email }) {
-
+  async handle({
+    username, title, when, email,
+  }) {
     await Mail.send(
-      ["emails.newmeetup"],
+      ['emails.newmeetup'],
       {
         username,
         title,
-        when
+        when,
       },
-      message => {
+      (message) => {
         message
           .to(email)
-          .from("vinality@teste.com", "Vinality | Testador")
-          .subject("Novo meetup no Meetapp");
-      }
+          .from('vinality@teste.com', 'Vinality | Testador')
+          .subject('Novo meetup no Meetapp');
+      },
     );
   }
 }

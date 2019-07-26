@@ -1,20 +1,45 @@
-"use strict";
-
-const Join = use("App/Models/JoinMeetup");
+/* eslint-disable class-methods-use-this */
+const Join = use('App/Models/JoinMeetup');
+const Meetup = use('App/Models/Meetup');
+const moment = require('moment');
 
 class JoinMeetupController {
-  async index({ params }) {
-    const join = await Join.query().where("meetup_id", params.id).fetch();
+  async index({ auth }) {
+    const now = moment().format();
+    const join = await Join.query()
+      .where('user_id', auth.jwtPayload.uid)
+      .andWhere('when', '>', now)
+      .orderBy('when', 'asc')
+      .with('meetup')
+      .fetch();
 
     return join;
   }
 
-  async store({ request, auth }) {
-    const data = await request.only(["meetup_id"]);
+  async store({ params, auth, response }) {
+    try {
+      const { id } = params;
+      const meet = await Meetup.findOrFail(id);
+      const now = moment();
 
-    const joinMeetup = await Join.create({...data, user_id: auth.jwtPayload.uid})
+      if (meet.user_id === auth.jwtPayload.uid) {
+        throw new Error('Você é o organizador do evento');
+      }
 
-    return joinMeetup;
+      if (moment(meet.when).isBefore(now)) {
+        throw new Error('Esse evento ja ocorreu');
+      }
+
+      const joinMeetup = await Join.create({
+        meetup_id: id,
+        user_id: auth.jwtPayload.uid,
+        when: meet.when,
+      });
+
+      return joinMeetup;
+    } catch (err) {
+      return response.status(400).send(err.message);
+    }
   }
 
   // async update({ params, request, response }) {}

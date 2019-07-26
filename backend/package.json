@@ -5,7 +5,7 @@
   "description": "Adonisjs boilerplate for API server with pre-configured JWT",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "nodemon server.js",
     "test": "node ace test"
   },
   "keywords": [
@@ -27,11 +27,16 @@
     "@adonisjs/mail": "^3.0.9",
     "@adonisjs/redis": "^2.0.7",
     "adonis-kue": "^5.0.1",
-    "eslint": "^5.16.0",
+    "adonis-lucid-filter": "^1.0.4",
     "moment": "^2.24.0",
+    "nodemon": "^1.19.1",
     "pg": "^7.9.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^13.2.0",
+    "eslint-plugin-import": "^2.18.2"
+  },
   "autoload": {
     "App": "./app"
   }

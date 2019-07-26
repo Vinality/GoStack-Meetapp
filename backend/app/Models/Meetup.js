@@ -1,17 +1,22 @@
 /* eslint-disable no-undef */
-'use strict'
 
 /** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
-const Model = use('Model')
+const Model = use('Model');
+const MeetupFilter = use('App/ModelFilters/MeetupFilter');
 
 class Meetup extends Model {
-  user () {
-    return this.hasMany('App/Models/User')
+  static boot() {
+    super.boot();
+    this.addTrait('@provider:Filterable', MeetupFilter);
   }
-  
-  file () {
-    return this.hasOne('App/Models/File')
+
+  user() {
+    return this.hasOne('App/Models/User', 'user_id', 'id');
+  }
+
+  file() {
+    return this.hasOne('App/Models/File', 'file_id', 'id');
   }
 }
 
-module.exports = Meetup
+module.exports = Meetup;
