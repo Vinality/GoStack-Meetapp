@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import logomeetapp from "../../logo.svg";
-import { Container } from "./styles";
+import { Container, Logo, Form, Input, Button } from "./styles";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { bindActionCreators } from "redux";
@@ -33,31 +33,28 @@ class Signup extends Component {
   render() {
     return (
       <Container>
-        <img src={logomeetapp} alt="Meetapp" />
-        <form onSubmit={this.handleSubmit}>
-          Nome
-          <input
+        <Logo src={logomeetapp} alt="Meetapp" />
+        <Form onSubmit={this.handleSubmit}>
+          <Input
             value={this.state.username}
             onChange={this.handleUser}
             placeholder="Digite seu nome"
           />
-          Email
-          <input
+          <Input
             value={this.state.email}
             onChange={this.handleEmail}
             type="email"
             placeholder="Digite seu email"
           />
-          Senha
-          <input
+          <Input
             value={this.state.password}
             onChange={this.handlePass}
             type="password"
             placeholder="Digite sua senha"
           />
-          <button type="submit">Cadastrar</button>
-          <Link to='/'>Já tenho conta</Link>
-        </form>
+          <Button type="submit">Cadastrar</Button>
+        </Form>
+        <Link to="/">Já tenho conta</Link>
       </Container>
     );
   }

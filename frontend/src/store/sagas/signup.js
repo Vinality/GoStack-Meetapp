@@ -12,7 +12,7 @@ export function* UserSignup(action) {
 
     const userData = {
       username: data.username,
-      email: data.email,
+      email: data.email
     };
     yield put(SignupActions.UserSignupSuccess(userData));
   } catch (err) {

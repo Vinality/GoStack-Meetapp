@@ -11,41 +11,19 @@ class Profile extends Component {
     username: "",
     password: "",
     confirm: "",
-    front: false,
-    back: false,
-    mobile: false,
-    devops: false,
-    gestao: false,
-    marketing: false,
     error: ""
   };
 
   componentWillMount() {
     this.setState({
-      username: this.props.data.username,
-      front: this.props.preferences.front,
-      back: this.props.preferences.back,
-      mobile: this.props.preferences.mobile,
-      devops: this.props.preferences.devops,
-      gestao: this.props.preferences.gestao,
-      marketing: this.props.preferences.marketing
+      username: this.props.data.username
     });
   }
 
   handleSubmit = e => {
     e.preventDefault();
 
-    const {
-      username,
-      password,
-      confirm,
-      front,
-      back,
-      mobile,
-      devops,
-      gestao,
-      marketing
-    } = this.state;
+    const { username, password, confirm } = this.state;
 
     if (password !== confirm) {
       this.setState({ error: true });
@@ -55,41 +33,12 @@ class Profile extends Component {
     const { UserUpdateProfileRequest } = this.props;
     const token = this.props.data.token;
 
-    UserUpdateProfileRequest(
-      back,
-      front,
-      mobile,
-      devops,
-      gestao,
-      marketing,
-      token,
-      username,
-      password
-    );
+    UserUpdateProfileRequest(token, username, password);
   };
 
   handleUser = e => this.setState({ username: e.target.value });
   handlePass = e => this.setState({ password: e.target.value });
   handleConfirm = e => this.setState({ confirm: e.target.value });
-
-  checkBack = () => {
-    this.setState({ back: !this.state.back });
-  };
-  checkFront = () => {
-    this.setState({ front: !this.state.front });
-  };
-  checkMobile = () => {
-    this.setState({ mobile: !this.state.mobile });
-  };
-  checkDevops = () => {
-    this.setState({ devops: !this.state.devops });
-  };
-  checkGestao = () => {
-    this.setState({ gestao: !this.state.gestao });
-  };
-  checkMarketing = () => {  
-    this.setState({ marketing: !this.state.marketing });
-  };
 
   render() {
     return (
@@ -127,61 +76,6 @@ class Profile extends Component {
                 placeholder="Confirme sua senha"
                 className="textinput"
               />
-            </label>
-            <h4>Preferências</h4>
-            <label className="check">
-              <input
-                type="checkbox"
-                name="back"
-                onChange={this.checkBack}
-                defaultChecked={this.state.back}
-              />
-              Back-end <br />
-            </label>
-            <label className="check">
-              <input
-                type="checkbox"
-                name="front"
-                onChange={this.checkFront}
-                defaultChecked={this.state.front}
-              />
-              Front-end <br />
-            </label>
-            <label className="check">
-              <input
-                type="checkbox"
-                name="mobile"
-                onChange={this.checkMobile}
-                defaultChecked={this.state.mobile}
-              />
-              Mobile <br />
-            </label>
-            <label className="check">
-              <input
-                type="checkbox"
-                name="devops"
-                onChange={this.checkDevops}
-                defaultChecked={this.state.devops}
-              />
-              Devops <br />
-            </label>
-            <label className="check">
-              <input
-                type="checkbox"
-                name="gestao"
-                onChange={this.checkGestao}
-                defaultChecked={this.state.gestao}
-              />
-              Gestão <br />
-            </label>
-            <label className="check">
-              <input
-                type="checkbox"
-                name="marketing"
-                onChange={this.checkMarketing}
-                defaultChecked={this.state.marketing}
-              />
-              Marketing <br />
             </label>
             <button type="submit">Continuar</button>
           </form>

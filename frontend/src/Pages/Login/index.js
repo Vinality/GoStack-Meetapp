@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import logomeetapp from "../../logo.svg";
-import { Container } from "./styles";
+import { Container, Form, Input, Button, Logo, Error } from "./styles";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Link } from "react-router-dom";
@@ -31,25 +31,25 @@ class Login extends Component {
   render() {
     return (
       <Container>
-        <img src={logomeetapp} alt="Meetapp" />
-        {this.props.error && <p>{this.props.errorMessage}</p>}
-        <form onSubmit={this.handleSubmit}>
-          Username
-          <input
+        <Form onSubmit={this.handleSubmit}>
+          <Logo src={logomeetapp} alt="Meetapp" />
+          {this.props.error && <Error>{this.props.errorMessage}</Error>}
+          <Input
             value={this.state.username}
             onChange={this.handleUser}
             placeholder="Digite seu e-mail"
           />
-          Senha
-          <input
+          <Input
             value={this.state.password}
             onChange={this.handlePass}
             type="password"
             placeholder="Digite sua senha"
           />
-          <button type="submit">Entrar</button>
-        </form>
-        <Link to='/signup'>Criar conta grátis</Link>
+          <Button type="submit" onClick={this.handleSubmit}>
+            Entrar
+          </Button>
+        </Form>
+        <Link to="/signup">Criar conta grátis</Link>
       </Container>
     );
   }
@@ -59,7 +59,7 @@ const mapStateToProps = state => ({
   error: state.user.error,
   data: state.user.data,
   errorMessage: state.user.errorMessage,
-  firstAccess: state.user.firstAccess
+  isLoggedIn: state.user.isLoggedIn
 });
 
 const mapDispatchToProps = dispatch =>

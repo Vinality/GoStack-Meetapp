@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Header from '../../Components/Header';
+import Header from "../../Components/Header";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Creators as UsersActions } from "../../store/ducks/user";
@@ -18,7 +18,7 @@ class Dashboard extends Component {
 }
 
 const mapStateToProps = state => ({
-  data: state.user.data,
+  data: state.user.data
 });
 
 const mapDispatchToProps = dispatch =>

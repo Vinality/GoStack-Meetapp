@@ -14,12 +14,12 @@ export const Container = styled.div`
     font-size: 17px;
   }
 
-  img {
-    padding: 20px 20px;
-    float: left;
-  }
-
   a.profile {
     float: right;
   }
+`;
+
+export const Img = styled.div`
+  padding: 20px 20px;
+  float: left;
 `;

@@ -10,20 +10,23 @@
 
 const Route = use('Route');
 
+// Autenticação e Sessões
 Route.post('users', 'UserController.store');
 Route.post('session', 'SessionController.store');
 
+// Atualização de senha
 Route.post('passwords', 'ForgotPasswordController.store');
 Route.put('passwords', 'ForgotPasswordController.update');
 
+// Upload de arquivos
 Route.post('/files', 'FileController.store');
 
 Route.group(() => {
   Route.get('/files/:id', 'FileController.show');
   Route.put('/users/update', 'UserController.update');
   Route.resource('meetups', 'MeetupController').apiOnly();
-  Route.get('/organized', 'OrganizerController.index');
+  Route.get('/meetups/owner', 'OrganizerController.index');
   Route.post('/joinmeetup/:id', 'JoinMeetupController.store');
   Route.get('/joinmeetup', 'JoinMeetupController.index');
-  Route.get('/subscribed', 'MeetupController.showSubscribed');
+  Route.get('/meetups/subscribed', 'MeetupController.showSubscribed');
 }).middleware(['auth']);
