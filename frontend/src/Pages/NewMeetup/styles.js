@@ -1,104 +1,65 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
+export const FormContainer = styled.div`
   display: flex;
-  flex-direction: column;
   justify-content: center;
-  margin-top: 50px;
-  margin-left: 40px;
-  color: #fff;
+  align-items: center;
+  flex-direction: column;
 
-  h4 {
-    margin-top: 20px;
-    display: flex;
-    justify-content: left;
-    /* color: #fff; */
-  }
-
-  form {
-    button {
-      margin: 10px 0 0;
-      background: #e5556e;
-      border-radius: 25px;
-      height: 44px;
-      border: 0;
-      color: #fff;
-      font-weight: bold;
-      cursor: pointer;
-      font-size: 16px;
-    }
-
-    button:hover {
-      background: rgb(249, 116, 138);
-    }
+  a {
+    margin-top: 30px;
+    color: #fff;
   }
 `;
 
-export const Label = styled.label`
-  font-size: 16px;
-  width: 100%;
-  max-width: 280px;
+export const Input = styled.input`
+  background-color: #251f2d;
+  border-radius: 5px;
+  font-size: 14px;
   color: #fff;
-  font-family: Arial, Helvetica, sans-serif;
+  width: 250px;
+  height: 20px;
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 0px;
+`;
+
+export const Form = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: stretch;
-  margin-left: 580px;
-
-  p {
-    margin-left: 20px;
-  }
-
-  input {
-    background-color: #241c2d;
-    color: #ffffff;
-    border: 0;
-    margin-top: 18px;
-    margin-left: -15px;
-    padding: 0 15px;
-    font-size: 14px;
-  }
-
-  input.preferences {
-    margin-top: 20px;
-    width: 20px;
-  }
 `;
 
-export const Preferences = styled.div`
-  margin-left: 590px;
+export const Button = styled.button`
+  border-radius: 8px;
+  width: 270px;
+  padding: 10px;
+  background: #f94d6a;
+  border: 10px;
+  margin-top: 10px;
+  font-size: 15px;
+  font-weight: bold;
+  color: #ffffff;
+  letter-spacing: 0;
+  text-align: center;
+  cursor: pointer;
 
-  input {
-    background-color: #241c2d;
-    color: #ffffff;
-    border: 0;
-    padding: 0 15px;
-    font-size: 14px;
-    height: 15px;
-    margin: 8px;
-  }
-
-  label.check {
-    margin: -15px;
-  }
-
-  h4 {
-    margin-left: -10px;
-  }
-  button {
-    margin-left: -10px;
-    background: #e5556e;
-    border-radius: 25px;
-    height: 44px;
-    width: 280px;
-    border: 0;
-    color: #fff;
-    font-weight: bold;
-    cursor: pointer;
-    font-size: 16px;
-  }
-
-  button:hover {
+  :hover {
     background: rgb(249, 116, 138);
   }
+`;
+
+export const Text = styled.h4`
+  color: #fff;
+`;
+
+export const Title = styled.h1`
+  color: #fff;
+  padding: 100px;
+`;
+
+export const Error = styled.p`
+  display: flex;
+  justify-content: center;
+  color: #e22476;
 `;

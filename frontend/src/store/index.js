@@ -1,21 +1,13 @@
 import { createStore, compose, applyMiddleware } from "redux";
 import createSagaMiddleware from "redux-saga";
-import { persistStore, persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage";
 import { connectRouter, routerMiddleware } from "connected-react-router";
-import history from "../routes/history";
-
 import reducers from "./ducks";
 import sagas from "./sagas";
+import history from "../history";
 
 const middlewares = [];
 
-const persistConfig = {
-  key: "meetapp",
-  storage
-};
-
-const persistedReducer = persistReducer(persistConfig, reducers);
+const createAppropriateStore = createStore;
 
 const sagaMonitor =
   process.env.NODE_ENV === "development"
@@ -32,16 +24,14 @@ const tronMiddleware =
     ? console.tron.createEnhancer
     : () => {};
 
-const store = createStore(
-  connectRouter(history)(persistedReducer),
+const store = createAppropriateStore(
+  connectRouter(history)(reducers),
   compose(
     applyMiddleware(...middlewares),
     tronMiddleware()
   )
 );
 
-const persistor = persistStore(store);
-
 sagaMiddleware.run(sagas);
 
-export { store, persistor };
+export default store;

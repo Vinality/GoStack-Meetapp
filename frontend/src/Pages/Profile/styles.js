@@ -1,70 +1,65 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
+export const FormContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  a {
+    margin-top: 30px;
+    color: #fff;
+  }
+`;
+
+export const Input = styled.input`
+  background-color: #251f2d;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #fff;
+  width: 250px;
+  height: 20px;
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 0px;
+`;
+
+export const Form = styled.div`
   display: flex;
   flex-direction: column;
+`;
+
+export const Button = styled.button`
+  border-radius: 8px;
+  width: 270px;
+  padding: 10px;
+  background: #f94d6a;
+  border: 10px;
+  margin-top: 10px;
+  font-size: 15px;
+  font-weight: bold;
+  color: #ffffff;
+  letter-spacing: 0;
+  text-align: center;
+  cursor: pointer;
+
+  :hover {
+    background: rgb(249, 116, 138);
+  }
+`;
+
+export const Text = styled.h4`
+  color: #fff;
+`;
+
+export const Title = styled.h1`
+  color: #fff;
+  padding: 100px;
+`;
+
+export const Error = styled.p`
+  display: flex;
   justify-content: center;
-  margin-top: 50px;
-  margin-left: 40px;
-  
-  p {
-    margin-top: 20px;
-    display: flex;
-    justify-content: center;
-    color: #e22476;
-  }
-  
-  form {
-    margin: 20px 0 0;
-    font-size: 16px;
-    width: 100%;
-    max-width: 280px;
-    color: #fff;
-    font-family: Arial, Helvetica, sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    margin-left: 580px;
-
-    input {
-      background-color: #241c2d;
-      color: #ffffff;
-      border: 0;
-      padding: 0 15px;
-      font-size: 14px;
-      height: 20px;
-      margin: 20px;
-    }
-
-    input.textinput {
-      margin-left: -15px;
-    }
-
-    label.check {
-      margin: -15px;
-    }
-
-    button {
-      margin: 10px 0 0;
-      background: #e5556e;
-      border-radius: 25px;
-      height: 44px;
-      border: 0;
-      color: #fff;
-      font-weight: bold;
-      cursor: pointer;
-      font-size: 16px;
-    }
-
-    button:hover {
-      background: rgb(249, 116, 138);
-    }
-  }
-  a {
-    margin-left: 660px;
-    margin-top: 15px;
-    color: #fff;
-    cursor: pointer;
-    width: 150px;
-  }
+  color: #e22476;
 `;

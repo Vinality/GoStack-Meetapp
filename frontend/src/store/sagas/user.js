@@ -17,6 +17,7 @@ export function* UserLogin(action) {
     };
 
     yield put(UsersActions.UserLoginSuccess(userData));
+    sessionStorage.setItem("@meetapp:user", JSON.stringify(userData));
     yield put(push("/dashboard"));
   } catch (err) {
     yield put(UsersActions.UserLoginFailure("Usuário ou senha incorretos!"));

@@ -8,5 +8,5 @@ export const Container = styled.div`
 export const Img = styled.img`
   height: 100px;
   border: 1px solid #000;
-  margin: 5px"
+  margin: 5px;
 `;
