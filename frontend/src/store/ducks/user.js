@@ -10,8 +10,7 @@ export const Types = {
 const INITIAL_STATE = {
   data: {},
   error: false,
-  errorMessage: "",
-  isLoggedIn: false
+  errorMessage: ""
 };
 
 export default function users(state = INITIAL_STATE, action) {
@@ -22,9 +21,8 @@ export default function users(state = INITIAL_STATE, action) {
       };
     case Types.LOGIN_SUCCESS:
       return {
-        data: action.payload.data,
-        error: false,
-        isLoggedIn: true
+        ...state,
+        data: action.payload.data
       };
     case Types.LOGIN_FAILURE:
       return {

@@ -29,18 +29,21 @@ class Login extends Component {
   };
 
   render() {
+    const { error, errorMessage } = this.props;
+    const { username, password } = this.state;
+
     return (
       <Container>
         <Form onSubmit={this.handleSubmit}>
           <Logo src={logomeetapp} alt="Meetapp" />
-          {this.props.error && <Error>{this.props.errorMessage}</Error>}
+          {error && <Error>{errorMessage}</Error>}
           <Input
-            value={this.state.username}
+            value={username}
             onChange={this.handleUser}
             placeholder="Digite seu e-mail"
           />
           <Input
-            value={this.state.password}
+            value={password}
             onChange={this.handlePass}
             type="password"
             placeholder="Digite sua senha"
@@ -58,8 +61,7 @@ class Login extends Component {
 const mapStateToProps = state => ({
   error: state.user.error,
   data: state.user.data,
-  errorMessage: state.user.errorMessage,
-  isLoggedIn: state.user.isLoggedIn
+  errorMessage: state.user.errorMessage
 });
 
 const mapDispatchToProps = dispatch =>

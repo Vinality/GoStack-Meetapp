@@ -1,9 +1,9 @@
 import { createStore, compose, applyMiddleware } from "redux";
 import createSagaMiddleware from "redux-saga";
-import { connectRouter, routerMiddleware } from "connected-react-router";
+import { routerMiddleware } from "connected-react-router";
 import reducers from "./ducks";
 import sagas from "./sagas";
-import history from "../history";
+import history from "../routes/history";
 
 const middlewares = [];
 
@@ -25,7 +25,9 @@ const tronMiddleware =
     : () => {};
 
 const store = createAppropriateStore(
-  connectRouter(history)(reducers),
+  // connectRouter(history)(
+  reducers,
+  // ),
   compose(
     applyMiddleware(...middlewares),
     tronMiddleware()

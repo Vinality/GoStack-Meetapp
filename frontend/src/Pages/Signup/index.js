@@ -31,23 +31,25 @@ class Signup extends Component {
   };
 
   render() {
+    const { username, password, email } = this.state;
+
     return (
       <Container>
         <Logo src={logomeetapp} alt="Meetapp" />
         <Form onSubmit={this.handleSubmit}>
           <Input
-            value={this.state.username}
+            value={username}
             onChange={this.handleUser}
             placeholder="Digite seu nome"
           />
           <Input
-            value={this.state.email}
+            value={email}
             onChange={this.handleEmail}
             type="email"
             placeholder="Digite seu email"
           />
           <Input
-            value={this.state.password}
+            value={password}
             onChange={this.handlePass}
             type="password"
             placeholder="Digite sua senha"
