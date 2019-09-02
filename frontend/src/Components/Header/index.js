@@ -1,13 +1,13 @@
 import React from "react";
-import logomeetapp from "../../logo-white.svg";
-import { Container, Img } from "./styles";
+import logowhite from "../../logos/logowhite.svg";
+import { Container, Logo } from "./styles";
 import { withRouter, Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 
 const Header = () => (
   <Container>
-    <Img border="0" alt="logo" src={logomeetapp} />
+    <Logo border="0" alt="logo" src={logowhite} />
     <Link to="/dashboard">Home</Link>
     <Link to="/new">Novo</Link>
     <Link to="/profile" className="profile">

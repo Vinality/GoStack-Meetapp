@@ -23,7 +23,7 @@ class MeetupController {
   }
 
   async store({ request, response, auth }) {
-    const data = request.only(['title', 'description', 'location', 'when', 'file_id']);
+    const data = request.all(['title', 'description', 'location', 'when', 'file_id']);
     const fileData = await File.findBy('id', data.file_id);
     const now = moment().format();
 

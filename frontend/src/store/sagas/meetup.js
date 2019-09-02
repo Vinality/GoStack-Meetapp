@@ -5,17 +5,32 @@ import { push } from "connected-react-router";
 
 export function* CreateMeetup(action) {
   try {
-    const { token, ...send } = action.payload;
+    const pload = action.payload;
     const config = {
-      headers: { Authorization: "bearer " + token }
+      headers: { Authorization: "bearer " + pload.token }
     };
 
-    const { data } = yield call(
-      api.post,
-      "/meetups",
-      send,
-      config
-    );
+    const formFile = new FormData();
+    formFile.append("file", pload.file);
+
+    const configFile = {
+      headers: {
+        "content-type": "multipart/form-data",
+        Authorization: "bearer " + pload.token
+      }
+    };
+
+    const fileData = yield call(api.post, "/files", formFile, configFile);
+
+    const send = {
+      title: pload.title,
+      description: pload.description,
+      location: pload.location,
+      when: pload.when,
+      file_id: fileData.data.id
+    };
+
+    const { data } = yield call(api.post, "/meetups", send, config);
 
     yield put(MeetupActions.MeetupSuccess(data));
     yield put(push("/dashboard"));

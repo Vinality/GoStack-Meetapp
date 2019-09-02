@@ -1,71 +1,58 @@
 import React, { Component } from "react";
-import { Img, Container } from "./styles";
-import api from "../../services/api";
+import { DropContainer } from "./styles";
+import Dropzone from "react-dropzone";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { Creators as MeetupActions } from "../../store/ducks/meetup";
 
 class FileUpload extends Component {
-  state = {
-    file: "",
-    imagePreviewUrl: "",
-    error: "",
-    fileName: ""
-  };
+  constructor() {
+    super();
+    this.onDrop = files => {
+      this.setState({ files });
+      const { UploadMeetupFile } = this.props;
+      const file = this.state.files[0];
 
-  getState() {
-    return this.state;
-  };
-
-  handleUpload = e => {
-    e.preventDefault();
-
-    console.log("handle upload: ", this.state.file);
-  };
-
-  getPreview = async e => {
-    const reader = new FileReader();
-    const file = e.target.files[0];
-
-    const formFile = new FormData();
-    await formFile.append("file", file);
-    const config = {
-      headers: { "content-type": "multipart/form-data" }
+      UploadMeetupFile(file);
     };
-
-    try {
-      const { data } = await api.post("/files", formFile, config);
-      this.setState({ fileName: data.file });
-      console.log(this.state.fileName);
-    } catch (err) {
-      this.setState({ error: "Erro ao subir arquivo" });
-    }
-
-    reader.onloadend = () => {
-      this.setState({
-        file,
-        imagePreviewUrl: reader.result
-      });
+    this.state = {
+      files: [],
+      fileName: ""
     };
-
-    reader.readAsDataURL(file);
-  };
+  }
 
   render() {
-    const { imagePreviewUrl } = this.state;
-    let imagePreview = null;
-    if (imagePreviewUrl) {
-      imagePreview = <Img src={imagePreviewUrl} alt="imagem" />;
-    } else {
-      imagePreview = <div className="previewText">Selecione uma imagem</div>;
-    }
+    const files = this.state.files.map(file => (
+      <li key={file.name}>
+        {file.name} - {file.size} bytes
+      </li>
+    ));
 
-    const { error } = this.state;
     return (
-      <Container>
-        {error !== "" && <p>{error}</p>}
-        <input type="file" onChange={this.getPreview} />
-        <div className="imgPreview">{imagePreview}</div>
-      </Container>
+      <div>
+        <Dropzone onDrop={this.onDrop}>
+          {({ getRootProps, getInputProps }) => (
+            <DropContainer className="container">
+              <div {...getRootProps({ className: "dropzone" })}>
+                <input {...getInputProps()} />
+                <p>Arraste um arquivo ou clique aqui para inserir uma imagem</p>
+              </div>
+              <aside>
+                <h4>Arquivo:</h4>
+                <ul>{files}</ul>
+              </aside>
+            </DropContainer>
+          )}
+        </Dropzone>
+      </div>
     );
   }
 }
 
-export default FileUpload;
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ ...MeetupActions }, dispatch);
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(FileUpload);

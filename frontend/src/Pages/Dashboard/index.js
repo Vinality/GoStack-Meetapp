@@ -7,10 +7,6 @@ import { Creators as UsersActions } from "../../store/ducks/user";
 // import { Container } from './styles';
 
 class Dashboard extends Component {
-  componentDidMount() {
-    console.tron.log("é udy");
-  }
-
   render() {
     return (
       <div>

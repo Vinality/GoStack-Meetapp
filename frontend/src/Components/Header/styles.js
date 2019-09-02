@@ -19,7 +19,7 @@ export const Container = styled.div`
   }
 `;
 
-export const Img = styled.div`
+export const Logo = styled.img`
   padding: 20px 20px;
   float: left;
 `;

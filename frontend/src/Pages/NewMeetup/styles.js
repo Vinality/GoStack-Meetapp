@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 export const FormContainer = styled.div`
   display: flex;
@@ -17,12 +19,27 @@ export const Input = styled.input`
   border-radius: 5px;
   font-size: 14px;
   color: #fff;
-  width: 250px;
+  width: 800px;
   height: 20px;
   padding: 10px;
   margin-top: 10px;
   margin-bottom: 10px;
   border: 0px;
+  word-wrap: break-word;
+`;
+
+export const TextArea = styled.textarea`
+  background-color: #251f2d;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #fff;
+  width: 800px;
+  height: 125px;
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 0px;
+  resize: none;
 `;
 
 export const Form = styled.div`
@@ -62,4 +79,17 @@ export const Error = styled.p`
   display: flex;
   justify-content: center;
   color: #e22476;
+`;
+
+export const DatePick = styled(DatePicker)`
+  background-color: #251f2d;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #fff;
+  width: 800px;
+  height: 20px;
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 0px;
 `;

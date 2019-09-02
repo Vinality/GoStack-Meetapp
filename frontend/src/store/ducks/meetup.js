@@ -2,13 +2,15 @@ export const Types = {
   CREATE_REQUEST: "meetup/CREATE_REQUEST",
   MEETUP_SUCCESS: "meetup/MEETUP_SUCCESS",
   MEETUP_FAILURE: "meetup/MEETUP_FAILURE",
-  GET_REQUEST: "meetup/GET_REQUEST"
+  GET_REQUEST: "meetup/GET_REQUEST",
+  UPLOAD_FILE: "meetup/UPLOAD_FILE"
 };
 
 const INITIAL_STATE = {
   data: [],
   error: false,
-  errorMessage: ""
+  errorMessage: "",
+  file: null
 };
 
 export default function meetup(state = INITIAL_STATE, action) {
@@ -28,26 +30,18 @@ export default function meetup(state = INITIAL_STATE, action) {
         error: true,
         errorMessage: action.payload.error
       };
+    case Types.UPLOAD_FILE:
+      return {
+        ...state,
+        file: action.payload.file
+      };
     default:
       return state;
   }
 }
 
 export const Creators = {
-  MeetupCreateRequest: (
-    title,
-    description,
-    file,
-    when,
-    location,
-    back,
-    front,
-    mobile,
-    devops,
-    gestao,
-    marketing,
-    token
-  ) => ({
+  MeetupCreateRequest: (title, description, file, when, location, token) => ({
     type: Types.CREATE_REQUEST,
     payload: {
       title,
@@ -55,12 +49,6 @@ export const Creators = {
       file,
       when,
       location,
-      back,
-      front,
-      mobile,
-      devops,
-      gestao,
-      marketing,
       token
     }
   }),
@@ -73,5 +61,10 @@ export const Creators = {
   MeetupFailure: error => ({
     type: Types.MEETUP_FAILURE,
     payload: { error }
+  }),
+
+  UploadMeetupFile: file => ({
+    type: Types.UPLOAD_FILE,
+    payload: { file }
   })
 };

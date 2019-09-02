@@ -1,8 +1,13 @@
 import React, { Component } from "react";
 // import logomeetapp from "../../logo.svg";
-import { FormContainer, Input, Button, Form, Text } from "./styles";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import {
+  FormContainer,
+  Input,
+  Button,
+  Form,
+  DatePick,
+  TextArea
+} from "./styles";
 import FileUpload from "../../Components/FileUpload";
 import Header from "../../Components/Header";
 import { connect } from "react-redux";
@@ -29,12 +34,19 @@ class NewMeetup extends Component {
   handleSubmit = e => {
     e.preventDefault();
     const { title, description, when, location } = this.state;
-    const file = this.refs.fileRef.getState().fileName;
+    const { file } = this.props;
     const { MeetupCreateRequest } = this.props;
 
-    const token = JSON.parse(sessionStorage.getItem("@meetapp:user"));
+    const storage = JSON.parse(sessionStorage.getItem("@meetapp:user"));
 
-    MeetupCreateRequest(title, description, file, when, location, token);
+    MeetupCreateRequest(
+      title,
+      description,
+      file,
+      when,
+      location,
+      storage.token
+    );
   };
 
   render() {
@@ -46,7 +58,7 @@ class NewMeetup extends Component {
           <Form onSubmit={this.handleSubmit} encType="multipart/form-data">
             <FileUpload ref="fileRef" />
 
-            <Text>Titulo</Text>
+            {/* <Text>Titulo</Text> */}
             <Input
               value={this.state.title}
               onChange={this.handleTitle}
@@ -54,17 +66,20 @@ class NewMeetup extends Component {
               className="textinput"
             />
 
-            <Text>Descrição</Text>
-            <Input
+            {/* <Text>Descrição</Text> */}
+            <TextArea
+              rows="4"
+              maxLength="500"
               value={this.state.description}
               onChange={this.handleDescription}
               type="textinput"
               placeholder="Descreva seu meetup"
               className="textinput"
+              style={{ height: "150px" }}
             />
 
-            <Text>Data</Text>
-            <DatePicker
+            {/* <Text>Data</Text> */}
+            <DatePick
               selected={this.state.when}
               onChange={this.handleDate}
               showTimeSelect
@@ -77,7 +92,7 @@ class NewMeetup extends Component {
               className="textinput"
             />
 
-            <Text>Local</Text>
+            {/* <Text>Local</Text> */}
             <Input
               value={this.state.location}
               onChange={this.handleLocation}
@@ -85,7 +100,7 @@ class NewMeetup extends Component {
               placeholder="Onde acontecerá o Meetup?"
               className="textinput"
             />
-            <Button type="submit">Continuar</Button>
+            <Button onClick={this.handleSubmit}>Continuar</Button>
           </Form>
         </FormContainer>
       </div>
@@ -97,7 +112,8 @@ const mapStateToProps = state => ({
   error: state.meetup.error,
   data: state.meetup.data,
   errorMessage: state.meetup.errorMessage,
-  token: state.user.data.token
+  token: state.user.data.token,
+  file: state.meetup.file
 });
 
 const mapDispatchToProps = dispatch =>

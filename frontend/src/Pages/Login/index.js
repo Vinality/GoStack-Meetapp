@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import logomeetapp from "../../logo.svg";
+import logomeetapp from "../../logos/logo.svg";
 import { Container, Form, Input, Button, Logo, Error } from "./styles";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
