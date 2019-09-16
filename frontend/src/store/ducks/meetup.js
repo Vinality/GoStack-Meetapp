@@ -3,6 +3,7 @@ export const Types = {
   MEETUP_SUCCESS: "meetup/MEETUP_SUCCESS",
   MEETUP_FAILURE: "meetup/MEETUP_FAILURE",
   GET_REQUEST: "meetup/GET_REQUEST",
+  INDEX_REQUEST: "meetup/INDEX_REQUEST",
   UPLOAD_FILE: "meetup/UPLOAD_FILE"
 };
 
@@ -30,6 +31,24 @@ export default function meetup(state = INITIAL_STATE, action) {
         error: true,
         errorMessage: action.payload.error
       };
+    case Types.MEETUP_SUCCESS:
+      return {
+        ...state,
+        data: action.payload.data,
+      };
+    case Types.MEETUP_FAILURE:
+      return {
+        ...state,
+        data: action.payload.data,
+      };
+    case Types.GET_REQUEST:
+      return {
+        ...state,
+      };
+    case Types.INDEX_REQUEST:
+      return {
+        ...state,
+      };
     case Types.UPLOAD_FILE:
       return {
         ...state,
@@ -56,6 +75,16 @@ export const Creators = {
   MeetupSuccess: data => ({
     type: Types.MEETUP_SUCCESS,
     payload: { data }
+  }),
+
+  GetRequest: id => ({
+    type: Types.GET_REQUEST,
+    payload: { id }
+  }),
+
+  IndexRequest: () => ({
+    type: Types.INDEX_REQUEST,
+    payload: {}
   }),
 
   MeetupFailure: error => ({

@@ -41,14 +41,32 @@ export function* CreateMeetup(action) {
 
 export function* GetMeetup(action) {
   try {
+    const storage = JSON.parse(sessionStorage.getItem('@meetapp:user'));
+
     const config = {
-      headers: { Authorization: "bearer " + action.payload.token }
+      headers: { Authorization: "bearer " + storage.token }
     };
 
-    const { payload: meetup } = action;
-    const { data } = yield call(api.get, `/meetups/${meetup.id}`, config);
+    const { id } = action.payload;
+    const { data } = yield call(api.get, `/meetups/${id}`, config);
     yield put(MeetupActions.MeetupSuccess(data));
   } catch (error) {
     yield put(MeetupActions.MeetupFailure("Erro ao buscar o Meetup"));
+  }
+}
+
+export function* GetAllMeetups() {
+  try {
+
+    const storage = JSON.parse(sessionStorage.getItem('@meetapp:user'));
+
+    const config = {
+      headers: { Authorization: "bearer " + storage.token }
+    };
+
+    const { data } = yield call(api.get, '/meetups', config);
+    yield put(MeetupActions.MeetupSuccess(data));
+  } catch (error) {
+    yield put(MeetupActions.MeetupFailure("Erro ao buscar Meetups"));
   }
 }

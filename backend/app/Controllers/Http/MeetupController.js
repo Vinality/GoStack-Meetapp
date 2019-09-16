@@ -2,7 +2,6 @@
 /* eslint-disable no-undef */
 
 const Meetup = use('App/Models/Meetup');
-const User = use('App/Models/User');
 const File = use('App/Models/File');
 const moment = require('moment');
 
@@ -17,6 +16,7 @@ class MeetupController {
     const meetups = await Meetup.query()
       .with('user', builder => builder.setHidden(['password', 'token', 'token_created_at']))
       .filter(params)
+      .with('file')
       .paginate(page, 10);
 
     return meetups;
@@ -45,7 +45,7 @@ class MeetupController {
   }
 
   async show({ params, response }) {
-    const meetup = await Meetup.find(params.id);
+    const meetup = await Meetup.query().where('id', params.id).with('file').fetch();
     const now = moment().format();
 
     if (moment(meetup.when).isBefore(now)) {

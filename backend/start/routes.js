@@ -20,9 +20,9 @@ Route.put('passwords', 'ForgotPasswordController.update');
 
 // Upload de arquivos
 Route.post('/files', 'FileController.store');
+Route.get('/files/:id', 'FileController.show');
 
 Route.group(() => {
-  Route.get('/files/:id', 'FileController.show');
   Route.put('/users/update', 'UserController.update');
   Route.resource('meetups', 'MeetupController').apiOnly();
   Route.get('/meetups/owner', 'OrganizerController.index');
