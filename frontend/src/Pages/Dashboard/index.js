@@ -3,11 +3,12 @@ import Header from "../../Components/Header";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Creators as MeetupActions } from "../../store/ducks/meetup";
-import MeetupCard from "../../Components/MeetupCard";
+import ImgMediaCard from "../../Components/Card";
 
 import { MeetupList } from './styles';
 
 class Dashboard extends Component {
+
   componentDidMount() {
     const { IndexRequest } = this.props;
     IndexRequest();
@@ -15,17 +16,19 @@ class Dashboard extends Component {
 
   render() {
     const { data } = this.props.meetups;
-    console.tron.log(data);
+
     return (
       <div>
         <Header />
         <MeetupList>
-          {data.data && data.data.map(meetup => {
-            return <MeetupCard
+          {data && data.map((meetup, id) => {
+            return (<ImgMediaCard
               title={meetup.title}
-              date={meetup.when}
-              file={meetup.file.url}
-            ></MeetupCard>
+              url={meetup.file.url}
+              description={meetup.description}
+              key={id}
+            >
+            </ImgMediaCard>)
           })}
         </MeetupList>
       </div>
@@ -34,7 +37,7 @@ class Dashboard extends Component {
 }
 
 const mapStateToProps = state => ({
-  meetups: state.meetup
+  meetups: state.meetup.data
 });
 
 const mapDispatchToProps = dispatch =>
