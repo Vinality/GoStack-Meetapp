@@ -9,9 +9,9 @@ import { MeetupList } from './styles';
 
 class Dashboard extends Component {
 
-  componentDidMount() {
+  componentDidMount = async () => {
     const { IndexRequest } = this.props;
-    IndexRequest();
+    await IndexRequest();
   }
 
   render() {
@@ -21,12 +21,13 @@ class Dashboard extends Component {
       <div>
         <Header />
         <MeetupList>
-          {data && data.map((meetup, id) => {
+          {data && data.map((meetup, count) => {
             return (<ImgMediaCard
               title={meetup.title}
               url={meetup.file.url}
               description={meetup.description}
-              key={id}
+              id={meetup.id}
+              key={count}
             >
             </ImgMediaCard>)
           })}
