@@ -43,6 +43,10 @@ export const Button = styled.button`
   letter-spacing: 0;
   text-align: center;
   cursor: pointer;
+
+  :hover {
+    background: rgb(249, 116, 138);
+  }
 `;
 
 export const Logo = styled.img`

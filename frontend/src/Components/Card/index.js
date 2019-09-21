@@ -3,7 +3,7 @@ import { MyCard } from './styles';
 import { Link } from 'react-router-dom';
 import { CardActionArea, CardContent, CardMedia, Typography } from '@material-ui/core'
 
-const ImgMediaCard = ({ url, title, description, id }) => {
+const ImgMediaCard = ({ url, title, when, id }) => {
   const linkTo = `/meetupDetail/${id}`;
   return (
     <Link to={linkTo} style={{ textDecoration: 'none' }}>
@@ -21,7 +21,7 @@ const ImgMediaCard = ({ url, title, description, id }) => {
               {title}
             </Typography>
             <Typography variant="body2" color="secondary" component="p">
-              {description}
+              {when}
             </Typography>
           </CardContent>
         </CardActionArea>

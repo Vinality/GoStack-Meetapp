@@ -4,8 +4,11 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { Creators as MeetupActions } from "../../store/ducks/meetup";
 import ImgMediaCard from "../../Components/Card";
+import moment from 'moment/min/moment-with-locales';
 
 import { MeetupList } from './styles';
+
+moment.locale('pt-br');
 
 class Dashboard extends Component {
 
@@ -25,7 +28,7 @@ class Dashboard extends Component {
             return (<ImgMediaCard
               title={meetup.title}
               url={meetup.file.url}
-              description={meetup.description}
+              when={moment(meetup.when).format('d [de] MMMM [de] YYYY')}
               id={meetup.id}
               key={count}
             >
