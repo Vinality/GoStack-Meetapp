@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import "./config/reactotron";
-import { Provider } from "react-redux";
-import store from "./store";
-import GlobalStyle from "./styles";
-import Routes from "./routes";
+import React, { Component } from 'react';
+import './config/reactotron';
+import { Provider } from 'react-redux';
+import store from './store';
+import GlobalStyle from './styles';
+import Routes from './routes';
 
 class App extends Component {
   render() {

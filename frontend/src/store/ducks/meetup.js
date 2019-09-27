@@ -1,36 +1,27 @@
 export const Types = {
-  CREATE_REQUEST: "meetup/CREATE_REQUEST",
-  MEETUP_SUCCESS: "meetup/MEETUP_SUCCESS",
-  MEETUP_FAILURE: "meetup/MEETUP_FAILURE",
-  GET_REQUEST: "meetup/GET_REQUEST",
-  INDEX_REQUEST: "meetup/INDEX_REQUEST",
-  UPLOAD_FILE: "meetup/UPLOAD_FILE"
+  CREATE_REQUEST: 'meetup/CREATE_REQUEST',
+  MEETUP_SUCCESS: 'meetup/MEETUP_SUCCESS',
+  MEETUP_FAILURE: 'meetup/MEETUP_FAILURE',
+  MEETUP_SUBSCRIBE: 'meetup/MEETUP_SUBSCRIBE',
+  MEETUP_UNSUBSCRIBE: 'meetup/MEETUP_UNSUBSCRIBE',
+  GET_REQUEST: 'meetup/GET_REQUEST',
+  INDEX_REQUEST: 'meetup/INDEX_REQUEST',
+  UPLOAD_FILE: 'meetup/UPLOAD_FILE',
 };
 
 const INITIAL_STATE = {
   data: [],
   error: false,
-  errorMessage: "",
-  file: null
+  errorMessage: '',
+  file: null,
 };
 
 export default function meetup(state = INITIAL_STATE, action) {
   switch (action.type) {
+    case Types.GET_REQUEST:
+    case Types.INDEX_REQUEST:
     case Types.CREATE_REQUEST:
-      return {
-        ...state
-      };
-    case Types.CREATE_SUCCESS:
-      return {
-        data: action.payload.data,
-        error: false
-      };
-    case Types.CREATE_FAILURE:
-      return {
-        ...state,
-        error: true,
-        errorMessage: action.payload.error
-      };
+    case Types.MEETUP_SUBSCRIBE:
     case Types.MEETUP_SUCCESS:
       return {
         ...state,
@@ -39,20 +30,13 @@ export default function meetup(state = INITIAL_STATE, action) {
     case Types.MEETUP_FAILURE:
       return {
         ...state,
-        data: action.payload.data,
-      };
-    case Types.GET_REQUEST:
-      return {
-        ...state,
-      };
-    case Types.INDEX_REQUEST:
-      return {
-        ...state,
+        error: true,
+        errorMessage: action.payload.error,
       };
     case Types.UPLOAD_FILE:
       return {
         ...state,
-        file: action.payload.file
+        file: action.payload.file,
       };
     default:
       return state;
@@ -68,32 +52,42 @@ export const Creators = {
       file,
       when,
       location,
-      token
-    }
+      token,
+    },
   }),
 
-  MeetupSuccess: data => ({
+  MeetupSuccess: (data) => ({
     type: Types.MEETUP_SUCCESS,
-    payload: { data }
+    payload: { data },
   }),
 
-  GetRequest: id => ({
+  GetRequest: (id) => ({
     type: Types.GET_REQUEST,
-    payload: { id }
+    payload: { id },
   }),
 
   IndexRequest: () => ({
     type: Types.INDEX_REQUEST,
-    payload: {}
+    payload: {},
   }),
 
-  MeetupFailure: error => ({
+  MeetupFailure: (error) => ({
     type: Types.MEETUP_FAILURE,
-    payload: { error }
+    payload: { error },
   }),
 
-  UploadMeetupFile: file => ({
+  UploadMeetupFile: (file) => ({
     type: Types.UPLOAD_FILE,
-    payload: { file }
-  })
+    payload: { file },
+  }),
+
+  SubscribeMeetup: (id) => ({
+    type: Types.MEETUP_SUBSCRIBE,
+    payload: { id },
+  }),
+
+  UnsubscribeMeetup: (id) => ({
+    type: Types.MEETUP_UNSUBSCRIBE,
+    payload: { id },
+  }),
 };

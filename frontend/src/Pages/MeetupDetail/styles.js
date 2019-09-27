@@ -21,19 +21,19 @@ export const Meetup = styled(Paper)`
   justify-content: center;
   align-items: flex-start;
   flex-direction: column;
-`
+`;
 
 export const Title = styled.h1`
   color: #fff;
   margin: 15px 0px 15px 0px; 
   width: 100%;
   border-bottom: 1px solid #e5556e;
-`
+`;
 
 export const Text = styled.p`
   color: #d1d1d1;
   margin-bottom: 5px;
-`
+`;
 
 export const ImgContainer = styled.div`
   width: 100%;
@@ -41,13 +41,13 @@ export const ImgContainer = styled.div`
   justify-content: center;
   align-items: center;
   margin-bottom: 10px;
-`
+`;
 
 export const Img = styled.img`
   max-height: 300px;
   max-width: 800px;
   margin: 10px;
-`
+`;
 
 export const Button = styled.button`
   border-radius: 8px;
@@ -67,5 +67,3 @@ export const Button = styled.button`
     background: rgb(249, 116, 138);
   }
 `;
-
-

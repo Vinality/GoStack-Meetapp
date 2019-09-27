@@ -1,9 +1,9 @@
-import React from "react";
-import logowhite from "../../logos/logowhite.svg";
-import { Container, Logo } from "./styles";
-import { withRouter, Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
+import React from 'react';
+import { withRouter, Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { Container, Logo } from './styles';
+import logowhite from '../../logos/logowhite.svg';
 
 const Header = () => (
   <Container>

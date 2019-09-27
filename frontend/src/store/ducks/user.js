@@ -1,53 +1,47 @@
 export const Types = {
-  LOGIN_REQUEST: "users/LOGIN_REQUEST",
-  LOGIN_SUCCESS: "users/LOGIN_SUCCESS",
-  LOGIN_FAILURE: "users/LOGIN_FAILURE",
-  UPDATE_PROFILE_REQUEST: "users/UPDATE_PROFILE_REQUEST",
-  UPDATE_PROFILE_SUCCESS: "users/UPDATE_PROFILE_SUCCESS",
-  UPDATE_PROFILE_FAILURE: "users/UPDATE_PROFILE_FAILURE"
+  LOGIN_REQUEST: 'users/LOGIN_REQUEST',
+  LOGIN_SUCCESS: 'users/LOGIN_SUCCESS',
+  LOGIN_FAILURE: 'users/LOGIN_FAILURE',
+  UPDATE_PROFILE_REQUEST: 'users/UPDATE_PROFILE_REQUEST',
+  UPDATE_PROFILE_SUCCESS: 'users/UPDATE_PROFILE_SUCCESS',
+  UPDATE_PROFILE_FAILURE: 'users/UPDATE_PROFILE_FAILURE',
 };
 
 const INITIAL_STATE = {
   data: {},
   error: false,
-  errorMessage: ""
+  errorMessage: '',
 };
 
 export default function users(state = INITIAL_STATE, action) {
   switch (action.type) {
     case Types.LOGIN_REQUEST:
-      return {
-        ...state
-      };
+    case Types.UPDATE_PROFILE_REQUEST:
     case Types.LOGIN_SUCCESS:
       return {
         ...state,
-        data: action.payload.data
+        data: action.payload.data,
       };
     case Types.LOGIN_FAILURE:
       return {
         ...state,
         error: true,
-        errorMessage: action.payload.error
-      };
-    case Types.UPDATE_PROFILE_REQUEST:
-      return {
-        ...state
+        errorMessage: action.payload.error,
       };
     case Types.UPDATE_PROFILE_SUCCESS:
       return {
         ...state,
         data: {
           username: action.payload.data.username,
-          token: action.payload.data.token
+          token: action.payload.data.token,
         },
-        error: false
+        error: false,
       };
     case Types.UPDATE_PROFILE_FAILURE:
       return {
         ...state,
         error: true,
-        errorMessage: action.payload.error
+        errorMessage: action.payload.error,
       };
     default:
       return state;
@@ -57,17 +51,17 @@ export default function users(state = INITIAL_STATE, action) {
 export const Creators = {
   UserLoginRequest: (email, password) => ({
     type: Types.LOGIN_REQUEST,
-    payload: { email, password }
+    payload: { email, password },
   }),
 
-  UserLoginSuccess: data => ({
+  UserLoginSuccess: (data) => ({
     type: Types.LOGIN_SUCCESS,
-    payload: { data }
+    payload: { data },
   }),
 
-  UserLoginFailure: error => ({
+  UserLoginFailure: (error) => ({
     type: Types.LOGIN_FAILURE,
-    payload: { error }
+    payload: { error },
   }),
 
   UserUpdateProfileRequest: (token, username, password) => ({
@@ -75,17 +69,17 @@ export const Creators = {
     payload: {
       token,
       username,
-      password
-    }
+      password,
+    },
   }),
 
-  UserUpdateProfileSuccess: data => ({
+  UserUpdateProfileSuccess: (data) => ({
     type: Types.UPDATE_PROFILE_SUCCESS,
-    payload: { data }
+    payload: { data },
   }),
 
-  UserUpdateProfileFailure: error => ({
+  UserUpdateProfileFailure: (error) => ({
     type: Types.UPDATE_PROFILE_FAILURE,
-    payload: { error }
-  })
+    payload: { error },
+  }),
 };

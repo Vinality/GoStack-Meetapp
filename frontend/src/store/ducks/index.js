@@ -1,16 +1,16 @@
-import { combineReducers } from "redux";
-import history from "../../routes/history";
-import { connectRouter } from "connected-react-router";
+import { combineReducers } from 'redux';
+import { connectRouter } from 'connected-react-router';
+import history from '../../routes/history';
 
-import user from "./user";
-import signup from "./signup";
-import meetup from "./meetup";
+import user from './user';
+import signup from './signup';
+import meetup from './meetup';
 
 const reducers = combineReducers({
   router: connectRouter(history),
   user,
   signup,
-  meetup
+  meetup,
 });
 
 export default reducers;

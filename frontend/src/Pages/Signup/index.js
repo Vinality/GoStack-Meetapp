@@ -1,23 +1,30 @@
-import React, { Component } from "react";
-import logomeetapp from "../../logos/logo.svg";
-import { Container, Logo, Form, Input, Button } from "./styles";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { bindActionCreators } from "redux";
-import { Creators as SignupActions } from "../../store/ducks/signup";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
+import {
+  Container, Logo, Form, Input, Button,
+} from './styles';
+import logomeetapp from '../../logos/logo.svg';
+import { Creators as SignupActions } from '../../store/ducks/signup';
 
 class Signup extends Component {
-  state = {
-    username: "",
-    email: "",
-    password: ""
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: '',
+      email: '',
+      password: '',
+    };
+  }
 
-  handleUser = e => this.setState({ username: e.target.value });
-  handleEmail = e => this.setState({ email: e.target.value });
-  handlePass = e => this.setState({ password: e.target.value });
+  handleUser = (e) => this.setState({ username: e.target.value });
 
-  handleSubmit = e => {
+  handleEmail = (e) => this.setState({ email: e.target.value });
+
+  handlePass = (e) => this.setState({ password: e.target.value });
+
+  handleSubmit = (e) => {
     e.preventDefault();
     const { username, email, password } = this.state;
     const { UserSignupRequest } = this.props;
@@ -25,9 +32,9 @@ class Signup extends Component {
     UserSignupRequest(username, email, password);
   };
 
-  handleClick = e => {
+  handleClick = (e) => {
     e.preventDefault();
-    this.props.history.push("/");
+    this.props.history.push('/');
   };
 
   render() {
@@ -62,16 +69,15 @@ class Signup extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   error: state.signup.error,
   data: state.signup.data,
-  errorMessage: state.signup.errorMessage
+  errorMessage: state.signup.errorMessage,
 });
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators({ ...SignupActions }, dispatch);
+const mapDispatchToProps = (dispatch) => bindActionCreators({ ...SignupActions }, dispatch);
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(Signup);

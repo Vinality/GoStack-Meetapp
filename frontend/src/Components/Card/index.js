@@ -1,9 +1,16 @@
 import React from 'react';
-import { MyCard } from './styles';
 import { Link } from 'react-router-dom';
-import { CardActionArea, CardContent, CardMedia, Typography } from '@material-ui/core'
+import {
+  CardActionArea,
+  CardContent,
+  CardMedia,
+  Typography,
+} from '@material-ui/core';
+import { MyCard } from './styles';
 
-const ImgMediaCard = ({ url, title, when, id }) => {
+const ImgMediaCard = ({
+  url, title, when, id,
+}) => {
   const linkTo = `/meetupDetail/${id}`;
   return (
     <Link to={linkTo} style={{ textDecoration: 'none' }}>
@@ -26,8 +33,8 @@ const ImgMediaCard = ({ url, title, when, id }) => {
           </CardContent>
         </CardActionArea>
       </MyCard>
-    </Link >
+    </Link>
   );
-}
+};
 
-export default ImgMediaCard
+export default ImgMediaCard;

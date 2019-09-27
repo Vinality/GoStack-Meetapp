@@ -1,14 +1,14 @@
-import React from "react";
-import { Switch, Route } from "react-router-dom";
-import { ConnectedRouter } from "connected-react-router";
-import Login from "../Pages/Login";
-import Signup from "../Pages/Signup";
-import Dashboard from "../Pages/Dashboard";
-import NewMeetup from "../Pages/NewMeetup";
-import Profile from "../Pages/Profile";
-import MeetupDetail from "../Pages/MeetupDetail";
+import React from 'react';
+import { Switch, Route } from 'react-router-dom';
+import { ConnectedRouter } from 'connected-react-router';
+import Login from '../Pages/Login';
+import Signup from '../Pages/Signup';
+import Dashboard from '../Pages/Dashboard';
+import NewMeetup from '../Pages/NewMeetup';
+import Profile from '../Pages/Profile';
+import MeetupDetail from '../Pages/MeetupDetail';
 
-import history from "./history";
+import history from './history';
 
 const Routes = () => (
   <ConnectedRouter history={history}>

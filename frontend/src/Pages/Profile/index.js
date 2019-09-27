@@ -1,4 +1,7 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import {
   Error,
   FormContainer,
@@ -6,30 +9,30 @@ import {
   Form,
   Text,
   Button,
-  Title
-} from "./styles";
-import { withRouter } from "react-router-dom";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import Header from "../../Components/Header";
-import { Creators as UsersActions } from "../../store/ducks/user";
+  Title,
+} from './styles';
+import Header from '../../Components/Header';
+import { Creators as UsersActions } from '../../store/ducks/user';
 
 class Profile extends Component {
-  state = {
-    username: "",
-    password: "",
-    confirm: "",
-    error: ""
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: '',
+      password: '',
+      confirm: '',
+      error: '',
+    };
+  }
 
   componentDidMount() {
-    const session = JSON.parse(sessionStorage.getItem("@meetapp:user"));
+    const session = JSON.parse(sessionStorage.getItem('@meetapp:user'));
     this.setState({
-      username: session.username
+      username: session.username,
     });
   }
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
 
     const { username, password, confirm } = this.state;
@@ -40,14 +43,16 @@ class Profile extends Component {
     }
 
     const { UserUpdateProfileRequest } = this.props;
-    const token = this.props.data.token;
+    const { token } = this.props.data;
 
     UserUpdateProfileRequest(token, username, password);
   };
 
-  handleUser = e => this.setState({ username: e.target.value });
-  handlePass = e => this.setState({ password: e.target.value });
-  handleConfirm = e => this.setState({ confirm: e.target.value });
+  handleUser = (e) => this.setState({ username: e.target.value });
+
+  handlePass = (e) => this.setState({ password: e.target.value });
+
+  handleConfirm = (e) => this.setState({ confirm: e.target.value });
 
   render() {
     return (
@@ -55,7 +60,7 @@ class Profile extends Component {
         <Header />
         <FormContainer>
           <Title>Editar perfil</Title>
-          {this.state.error !== "" && <Error>As senhas devem coincidir!</Error>}
+          {this.state.error !== '' && <Error>As senhas devem coincidir!</Error>}
           <Form onSubmit={this.handleSubmit}>
             <Text>Nome</Text>
             <Input
@@ -85,18 +90,17 @@ class Profile extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   data: state.user.data,
   error: state.user.error,
-  errorMessage: state.user.errorMessage
+  errorMessage: state.user.errorMessage,
 });
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators({ ...UsersActions }, dispatch);
+const mapDispatchToProps = (dispatch) => bindActionCreators({ ...UsersActions }, dispatch);
 
 export default withRouter(
   connect(
     mapStateToProps,
-    mapDispatchToProps
-  )(Profile)
+    mapDispatchToProps,
+  )(Profile),
 );

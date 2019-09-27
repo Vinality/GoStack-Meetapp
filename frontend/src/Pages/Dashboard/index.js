@@ -1,18 +1,17 @@
-import React, { Component } from "react";
-import Header from "../../Components/Header";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import { Creators as MeetupActions } from "../../store/ducks/meetup";
-import ImgMediaCard from "../../Components/Card";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import moment from 'moment/min/moment-with-locales';
+import Header from '../../Components/Header';
+import { Creators as MeetupActions } from '../../store/ducks/meetup';
+import ImgMediaCard from '../../Components/Card';
 
 import { MeetupList } from './styles';
 
 moment.locale('pt-br');
 
 class Dashboard extends Component {
-
-  componentDidMount = async () => {
+  async componentDidMount() {
     const { IndexRequest } = this.props;
     await IndexRequest();
   }
@@ -24,30 +23,28 @@ class Dashboard extends Component {
       <div>
         <Header />
         <MeetupList>
-          {data && data.map((meetup, count) => {
-            return (<ImgMediaCard
+          {data && data.map((meetup, count) => (
+            <ImgMediaCard
               title={meetup.title}
               url={meetup.file.url}
               when={moment(meetup.when).format('d [de] MMMM [de] YYYY')}
               id={meetup.id}
               key={count}
-            >
-            </ImgMediaCard>)
-          })}
+            />
+          ))}
         </MeetupList>
       </div>
     );
   }
 }
 
-const mapStateToProps = state => ({
-  meetups: state.meetup.data
+const mapStateToProps = (state) => ({
+  meetups: state.meetup.data,
 });
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators({ ...MeetupActions }, dispatch);
+const mapDispatchToProps = (dispatch) => bindActionCreators({ ...MeetupActions }, dispatch);
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(Dashboard);

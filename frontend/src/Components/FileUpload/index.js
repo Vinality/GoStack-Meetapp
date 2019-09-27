@@ -1,14 +1,15 @@
-import React, { Component } from "react";
-import { DropContainer } from "./styles";
-import Dropzone from "react-dropzone";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import { Creators as MeetupActions } from "../../store/ducks/meetup";
+/* eslint-disable react/destructuring-assignment */
+import React, { Component } from 'react';
+import Dropzone from 'react-dropzone';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { Creators as MeetupActions } from '../../store/ducks/meetup';
+import { DropContainer } from './styles';
 
 class FileUpload extends Component {
   constructor() {
     super();
-    this.onDrop = files => {
+    this.onDrop = (files) => {
       this.setState({ files });
       const { UploadMeetupFile } = this.props;
       const file = this.state.files[0];
@@ -17,12 +18,11 @@ class FileUpload extends Component {
     };
     this.state = {
       files: [],
-      fileName: ""
     };
   }
 
   render() {
-    const files = this.state.files.map(file => (
+    const files = this.state.files.map((file) => (
       <li key={file.name}>
         {file.name} - {file.size} bytes
       </li>
@@ -33,7 +33,7 @@ class FileUpload extends Component {
         <Dropzone onDrop={this.onDrop}>
           {({ getRootProps, getInputProps }) => (
             <DropContainer className="container">
-              <div {...getRootProps({ className: "dropzone" })}>
+              <div {...getRootProps({ className: 'dropzone' })}>
                 <input {...getInputProps()} />
                 <p>Arraste um arquivo ou clique aqui para inserir uma imagem</p>
               </div>
@@ -49,10 +49,9 @@ class FileUpload extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators({ ...MeetupActions }, dispatch);
+const mapDispatchToProps = (dispatch) => bindActionCreators({ ...MeetupActions }, dispatch);
 
 export default connect(
   null,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(FileUpload);

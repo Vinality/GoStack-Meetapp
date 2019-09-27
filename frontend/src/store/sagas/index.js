@@ -1,11 +1,11 @@
-import { all, takeLatest } from "redux-saga/effects";
+import { all, takeLatest } from 'redux-saga/effects';
 
-import { Types as UsersTypes } from "../ducks/user";
-import { Types as SignupTypes } from "../ducks/signup";
-import { Types as MeetupTypes } from "../ducks/meetup";
-import { UserLogin, UserUpdateProfile } from "./user";
-import { UserSignup } from "./signup";
-import { CreateMeetup, GetMeetup, GetAllMeetups } from "./meetup";
+import { Types as UsersTypes } from '../ducks/user';
+import { Types as SignupTypes } from '../ducks/signup';
+import { Types as MeetupTypes } from '../ducks/meetup';
+import { UserLogin, UserUpdateProfile } from './user';
+import { UserSignup } from './signup';
+import { CreateMeetup, GetMeetup, GetAllMeetups } from './meetup';
 
 export default function* rootSaga() {
   yield all([
@@ -14,6 +14,6 @@ export default function* rootSaga() {
     takeLatest(MeetupTypes.CREATE_REQUEST, CreateMeetup),
     takeLatest(MeetupTypes.GET_REQUEST, GetMeetup),
     takeLatest(MeetupTypes.INDEX_REQUEST, GetAllMeetups),
-    takeLatest(SignupTypes.SIGNUP_REQUEST, UserSignup)
+    takeLatest(SignupTypes.SIGNUP_REQUEST, UserSignup),
   ]);
 }

@@ -1,55 +1,55 @@
-import { call, put } from "redux-saga/effects";
-import { push } from "connected-react-router";
-import api from "../../services/api";
-import { Creators as UsersActions } from "../ducks/user";
+import { call, put } from 'redux-saga/effects';
+import { push } from 'connected-react-router';
+import api from '../../services/api';
+import { Creators as UsersActions } from '../ducks/user';
 
 export function* UserLogin(action) {
   try {
-    const { data } = yield call(api.post, "/session", {
+    const { data } = yield call(api.post, '/session', {
       email: action.payload.email,
-      password: action.payload.password
+      password: action.payload.password,
     });
 
     const userData = {
       token: data.auth.token,
       username: data.username,
-      email: data.email
+      email: data.email,
     };
 
-    sessionStorage.setItem("@meetapp:user", JSON.stringify(userData));
+    sessionStorage.setItem('@meetapp:user', JSON.stringify(userData));
 
     yield put(UsersActions.UserLoginSuccess(userData));
-    yield put(push("/dashboard"));
+    yield put(push('/dashboard'));
   } catch (err) {
-    yield put(UsersActions.UserLoginFailure("Usuário ou senha incorretos!"));
+    yield put(UsersActions.UserLoginFailure('Usuário ou senha incorretos!'));
   }
 }
 
 export function* UserUpdateProfile(action) {
   try {
     const config = {
-      headers: { Authorization: "bearer " + action.payload.token }
+      headers: { Authorization: `bearer ${action.payload.token}` },
     };
 
     const { data } = yield call(
       api.put,
-      "/users/update",
+      '/users/update',
       {
         username: action.payload.username,
-        password: action.payload.password
+        password: action.payload.password,
       },
-      config
+      config,
     );
 
     const userData = {
       username: action.payload.username,
-      token: data.token
+      token: data.token,
     };
 
     yield put(UsersActions.UserUpdateProfileSuccess(userData));
   } catch (err) {
     yield put(
-      UsersActions.UserUpdateProfileFailure("Falha ao atualizar usuário")
+      UsersActions.UserUpdateProfileFailure('Falha ao atualizar usuário'),
     );
   }
 }

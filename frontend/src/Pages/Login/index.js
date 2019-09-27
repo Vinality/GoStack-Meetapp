@@ -1,26 +1,32 @@
-import React, { Component } from "react";
-import logomeetapp from "../../logos/logo.svg";
-import { Container, Form, Input, Button, Logo, Error } from "./styles";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import { Link } from "react-router-dom";
-import { Creators as UsersActions } from "../../store/ducks/user";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { Link } from 'react-router-dom';
+import {
+  Container, Form, Input, Button, Logo, Error,
+} from './styles';
+import logomeetapp from '../../logos/logo.svg';
+import { Creators as UsersActions } from '../../store/ducks/user';
 
 class Login extends Component {
-  state = {
-    username: "",
-    password: ""
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: '',
+      password: '',
+    };
+  }
 
-  handleUser = e => this.setState({ username: e.target.value });
-  handlePass = e => this.setState({ password: e.target.value });
+  handleUser = (e) => this.setState({ username: e.target.value });
 
-  handleClick = e => {
+  handlePass = (e) => this.setState({ password: e.target.value });
+
+  handleClick = (e) => {
     e.preventDefault();
-    this.props.history.push("/signup");
+    this.props.history.push('/signup');
   };
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
     const { username, password } = this.state;
     const { UserLoginRequest } = this.props;
@@ -58,16 +64,15 @@ class Login extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   error: state.user.error,
   data: state.user.data,
-  errorMessage: state.user.errorMessage
+  errorMessage: state.user.errorMessage,
 });
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators({ ...UsersActions }, dispatch);
+const mapDispatchToProps = (dispatch) => bindActionCreators({ ...UsersActions }, dispatch);
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(Login);

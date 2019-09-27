@@ -1,43 +1,56 @@
-import React, { Component } from "react";
-// import logomeetapp from "../../logo.svg";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import {
   FormContainer,
   Input,
   Button,
   Form,
   DatePick,
-  TextArea
-} from "./styles";
-import FileUpload from "../../Components/FileUpload";
-import Header from "../../Components/Header";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import { Creators as MeetupActions } from "../../store/ducks/meetup";
-import { Creators as UserActions } from "../../store/ducks/user";
+  TextArea,
+} from './styles';
+import FileUpload from '../../Components/FileUpload';
+import Header from '../../Components/Header';
+import { Creators as MeetupActions } from '../../store/ducks/meetup';
+import { Creators as UserActions } from '../../store/ducks/user';
 
 class NewMeetup extends Component {
-  state = {
-    title: "",
-    description: "",
-    when: new Date(),
-    location: ""
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      title: '',
+      description: '',
+      when: new Date(),
+      location: '',
+    };
+  }
 
-  handleTitle = e => this.setState({ title: e.target.value });
-  handleDescription = e => this.setState({ description: e.target.value });
-  handlePass = e => this.setState({ password: e.target.value });
-  handleLocation = e => this.setState({ location: e.target.value });
-  handleDate = date => {
+  // state = {
+  //   title: '',
+  //   description: '',
+  //   when: new Date(),
+  //   location: '',
+  // };
+
+  handleTitle = (e) => this.setState({ title: e.target.value });
+
+  handleDescription = (e) => this.setState({ description: e.target.value });
+
+  handleLocation = (e) => this.setState({ location: e.target.value });
+
+  handleDate = (date) => {
     this.setState({ when: date });
   };
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
-    const { title, description, when, location } = this.state;
+    const {
+      title, description, when, location,
+    } = this.state;
     const { file } = this.props;
     const { MeetupCreateRequest } = this.props;
 
-    const storage = JSON.parse(sessionStorage.getItem("@meetapp:user"));
+    const storage = JSON.parse(sessionStorage.getItem('@meetapp:user'));
 
     MeetupCreateRequest(
       title,
@@ -45,7 +58,7 @@ class NewMeetup extends Component {
       file,
       when,
       location,
-      storage.token
+      storage.token,
     );
   };
 
@@ -75,7 +88,7 @@ class NewMeetup extends Component {
               type="textinput"
               placeholder="Descreva seu meetup"
               className="textinput"
-              style={{ height: "150px" }}
+              style={{ height: '150px' }}
             />
 
             {/* <Text>Data</Text> */}
@@ -108,18 +121,19 @@ class NewMeetup extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   error: state.meetup.error,
   data: state.meetup.data,
   errorMessage: state.meetup.errorMessage,
   token: state.user.data.token,
-  file: state.meetup.file
+  file: state.meetup.file,
 });
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators({ ...MeetupActions, ...UserActions }, dispatch);
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+  ...MeetupActions, ...UserActions,
+}, dispatch);
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(NewMeetup);

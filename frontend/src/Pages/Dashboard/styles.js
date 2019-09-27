@@ -8,6 +8,3 @@ export const MeetupList = styled.div`
   justify-content: center;
   align-items: center;
 `;
-
-
-
