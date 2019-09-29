@@ -77,10 +77,24 @@ export function* SubscribeToMeetup(action) {
     const config = {
       headers: { Authorization: `bearer ${storage.token}` },
     };
-
-    yield call(api.get, `/joinmeetup/${action.payload.id}`, config);
-    yield put(push('/dashboard'));
+    const { data } = yield call(api.post, `/joinmeetup/${action.payload.id}`, {}, config);
+    yield put(MeetupActions.MeetupSuccess(data));
   } catch (error) {
-    yield put(MeetupActions.MeetupFailure('Erro ao se inscrever em meetup'));
+    yield put(MeetupActions.MeetupFailure(error.message));
+  }
+}
+
+export function* UnsubscribeToMeetup(action) {
+  try {
+    const storage = JSON.parse(sessionStorage.getItem('@meetapp:user'));
+
+    const config = {
+      headers: { Authorization: `bearer ${storage.token}` },
+    };
+
+    const { data } = yield call(api.post, `/joinmeetup/unsub/${action.payload.id}`, {}, config);
+    yield put(MeetupActions.MeetupSuccess(data));
+  } catch (error) {
+    yield put(MeetupActions.MeetupFailure('Erro ao se desinscrever em meetup'));
   }
 }

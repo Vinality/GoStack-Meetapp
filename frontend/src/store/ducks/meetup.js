@@ -12,6 +12,7 @@ export const Types = {
 const INITIAL_STATE = {
   data: [],
   error: false,
+  loading: false,
   errorMessage: '',
   file: null,
 };
@@ -19,19 +20,32 @@ const INITIAL_STATE = {
 export default function meetup(state = INITIAL_STATE, action) {
   switch (action.type) {
     case Types.GET_REQUEST:
+      return { ...state };
     case Types.INDEX_REQUEST:
+      return { ...state };
     case Types.CREATE_REQUEST:
     case Types.MEETUP_SUBSCRIBE:
+      return {
+        ...state,
+        loading: true,
+      };
+    case Types.MEETUP_UNSUBSCRIBE:
+      return {
+        ...state,
+        loading: true,
+      };
     case Types.MEETUP_SUCCESS:
       return {
         ...state,
         data: action.payload.data,
+        loading: false,
       };
     case Types.MEETUP_FAILURE:
       return {
         ...state,
         error: true,
         errorMessage: action.payload.error,
+        loading: false,
       };
     case Types.UPLOAD_FILE:
       return {

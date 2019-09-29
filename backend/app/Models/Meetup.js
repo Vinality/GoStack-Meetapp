@@ -14,6 +14,12 @@ class Meetup extends Model {
     return this.hasOne('App/Models/User', 'user_id', 'id');
   }
 
+  join() {
+    return this.belongsToMany('App/Models/User')
+      .pivotTable('join_meetups')
+      .pivotModel('App/Models/JoinMeetup');
+  }
+
   file() {
     return this.hasOne('App/Models/File', 'file_id', 'id');
   }

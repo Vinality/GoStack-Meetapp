@@ -1,11 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 import moment from 'moment/min/moment-with-locales';
 import Header from '../../Components/Header';
 import { Creators as MeetupActions } from '../../store/ducks/meetup';
 import {
-  Container, Title, Meetup, Img, ImgContainer, Button, Text,
+  Container,
+  Title,
+  Meetup,
+  Img,
+  ImgContainer,
+  Button,
+  Text,
 } from './styles';
 
 moment.locale('pt-br');
@@ -16,8 +24,33 @@ class MeetupDetail extends Component {
     await GetRequest(this.props.match.params.id);
   }
 
+  subscribed = () => {
+    const storage = JSON.parse(sessionStorage.getItem('@meetapp:user'));
+    const { id } = storage;
+    const { meetups } = this.props;
+    const meetup = meetups.data[0];
+
+    if (!meetup) return false;
+    if (!meetup.join) return false;
+
+    const index = meetup.join.findIndex((user) => user.id === id);
+    if (index >= 0) return true;
+
+    return false;
+  }
+
+  handleClick = async (id) => {
+    if (this.subscribed()) {
+      await this.props.UnsubscribeMeetup(id);
+    } else {
+      await this.props.SubscribeMeetup(id);
+    }
+  }
+
   render() {
-    const meetup = this.props.meetups[0];
+    const meetup = this.props.meetups.data[0];
+    const { loading } = this.props.meetups;
+    const text = this.subscribed() ? 'Cancelar Inscrição' : 'Inscrever-se';
 
     return (
       <div>
@@ -35,8 +68,8 @@ class MeetupDetail extends Component {
             </Title>
             <Text>{meetup.location}</Text>
             <Text>{moment(meetup.when).format('d [de] MMMM [de] YYYY')}</Text>
-            <Button onClick={this.handleSubmit}>
-              Participar
+            <Button onClick={() => this.handleClick(meetup.id)}>
+              {loading ? <FontAwesomeIcon icon={faSpinner} /> : text}
             </Button>
           </Meetup>
         </Container>
@@ -47,7 +80,7 @@ class MeetupDetail extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  meetups: state.meetup.data,
+  meetups: state.meetup,
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({ ...MeetupActions }, dispatch);

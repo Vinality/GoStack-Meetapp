@@ -11,6 +11,7 @@ class SessionController {
       auth: token,
       username: user.username,
       email: user.email,
+      id: user.id,
     };
   }
 }

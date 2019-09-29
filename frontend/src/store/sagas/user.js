@@ -14,6 +14,7 @@ export function* UserLogin(action) {
       token: data.auth.token,
       username: data.username,
       email: data.email,
+      id: data.id,
     };
 
     sessionStorage.setItem('@meetapp:user', JSON.stringify(userData));

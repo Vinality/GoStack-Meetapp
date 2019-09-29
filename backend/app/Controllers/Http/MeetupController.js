@@ -45,7 +45,13 @@ class MeetupController {
   }
 
   async show({ params, response }) {
-    const meetup = await Meetup.query().where('id', params.id).with('file').fetch();
+    const meetup = await Meetup
+      .query()
+      .where('id', params.id)
+      .with('file')
+      .with('join')
+      .fetch();
+
     const now = moment().format();
 
     if (moment(meetup.when).isBefore(now)) {

@@ -16,6 +16,7 @@ const INITIAL_STATE = {
 export default function users(state = INITIAL_STATE, action) {
   switch (action.type) {
     case Types.LOGIN_REQUEST:
+      return { ...state };
     case Types.UPDATE_PROFILE_REQUEST:
     case Types.LOGIN_SUCCESS:
       return {

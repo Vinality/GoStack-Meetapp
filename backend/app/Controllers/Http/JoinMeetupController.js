@@ -30,13 +30,20 @@ class JoinMeetupController {
         throw new Error('Esse evento ja ocorreu');
       }
 
-      const joinMeetup = await Join.create({
+      await Join.create({
         meetup_id: id,
         user_id: auth.jwtPayload.uid,
         when: meet.when,
       });
 
-      return joinMeetup;
+      const meetup = await Meetup
+        .query()
+        .where({ id })
+        .with('join')
+        .with('file')
+        .fetch();
+
+      return meetup;
     } catch (err) {
       return response.status(400).send(err.message);
     }
@@ -44,7 +51,27 @@ class JoinMeetupController {
 
   // async update({ params, request, response }) {}
 
-  // async destroy({ params, request, response }) {}
+  async destroy({ auth, params, response }) {
+    const { id } = params;
+    try {
+      await Join
+        .query()
+        .where('user_id', auth.jwtPayload.uid)
+        .andWhere('meetup_id', id)
+        .delete();
+
+      const meetup = await Meetup
+        .query()
+        .where({ id })
+        .with('join')
+        .with('file')
+        .fetch();
+
+      return meetup;
+    } catch (err) {
+      return response.status(400).send(err.message);
+    }
+  }
 }
 
 module.exports = JoinMeetupController;

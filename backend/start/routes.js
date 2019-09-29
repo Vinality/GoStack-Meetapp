@@ -27,6 +27,7 @@ Route.group(() => {
   Route.resource('meetups', 'MeetupController').apiOnly();
   Route.get('/meetups/owner', 'OrganizerController.index');
   Route.post('/joinmeetup/:id', 'JoinMeetupController.store');
+  Route.post('/joinmeetup/unsub/:id', 'JoinMeetupController.destroy');
   Route.get('/joinmeetup', 'JoinMeetupController.index');
   Route.get('/meetups/subscribed', 'MeetupController.showSubscribed');
 }).middleware(['auth']);
