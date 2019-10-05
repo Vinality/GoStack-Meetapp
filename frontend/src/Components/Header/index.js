@@ -9,8 +9,10 @@ const Header = () => (
   <Container>
     <Logo border="0" alt="logo" src={logowhite} />
     <Link to="/dashboard">Home</Link>
+    <Link to="/subscribed">Inscrições</Link>
     <Link to="/new">Novo</Link>
     <Link to="/profile" className="profile">
+
       <FontAwesomeIcon icon={faUser} />
     </Link>
   </Container>

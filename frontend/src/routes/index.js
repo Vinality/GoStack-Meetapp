@@ -6,6 +6,7 @@ import Signup from '../Pages/Signup';
 import Dashboard from '../Pages/Dashboard';
 import NewMeetup from '../Pages/NewMeetup';
 import Profile from '../Pages/Profile';
+import Subscribed from '../Pages/Subscribed';
 import MeetupDetail from '../Pages/MeetupDetail';
 
 import history from './history';
@@ -17,6 +18,7 @@ const Routes = () => (
       <Route path="/signup" exact component={Signup} />
       <Route path="/dashboard" exact component={Dashboard} />
       <Route path="/profile" exact component={Profile} />
+      <Route path="/subscribed" exact component={Subscribed} />
       <Route path="/new" exact component={NewMeetup} />
       <Route path="/meetupDetail/:id" exact component={MeetupDetail} />
     </Switch>

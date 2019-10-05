@@ -27,7 +27,7 @@ class Dashboard extends Component {
             <ImgMediaCard
               title={meetup.title}
               url={meetup.file.url}
-              when={moment(meetup.when).format('d [de] MMMM [de] YYYY')}
+              when={moment(meetup.when).format('D [de] MMMM [de] YYYY')}
               id={meetup.id}
               key={count}
             />

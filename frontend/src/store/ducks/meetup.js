@@ -2,8 +2,6 @@ export const Types = {
   CREATE_REQUEST: 'meetup/CREATE_REQUEST',
   MEETUP_SUCCESS: 'meetup/MEETUP_SUCCESS',
   MEETUP_FAILURE: 'meetup/MEETUP_FAILURE',
-  MEETUP_SUBSCRIBE: 'meetup/MEETUP_SUBSCRIBE',
-  MEETUP_UNSUBSCRIBE: 'meetup/MEETUP_UNSUBSCRIBE',
   GET_REQUEST: 'meetup/GET_REQUEST',
   INDEX_REQUEST: 'meetup/INDEX_REQUEST',
   UPLOAD_FILE: 'meetup/UPLOAD_FILE',
@@ -20,20 +18,10 @@ const INITIAL_STATE = {
 export default function meetup(state = INITIAL_STATE, action) {
   switch (action.type) {
     case Types.GET_REQUEST:
-      return { ...state };
+      return { ...state, data: [] };
     case Types.INDEX_REQUEST:
       return { ...state };
     case Types.CREATE_REQUEST:
-    case Types.MEETUP_SUBSCRIBE:
-      return {
-        ...state,
-        loading: true,
-      };
-    case Types.MEETUP_UNSUBSCRIBE:
-      return {
-        ...state,
-        loading: true,
-      };
     case Types.MEETUP_SUCCESS:
       return {
         ...state,
@@ -93,15 +81,5 @@ export const Creators = {
   UploadMeetupFile: (file) => ({
     type: Types.UPLOAD_FILE,
     payload: { file },
-  }),
-
-  SubscribeMeetup: (id) => ({
-    type: Types.MEETUP_SUBSCRIBE,
-    payload: { id },
-  }),
-
-  UnsubscribeMeetup: (id) => ({
-    type: Types.MEETUP_UNSUBSCRIBE,
-    payload: { id },
   }),
 };

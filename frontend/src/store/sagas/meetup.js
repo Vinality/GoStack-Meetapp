@@ -98,3 +98,18 @@ export function* UnsubscribeToMeetup(action) {
     yield put(MeetupActions.MeetupFailure('Erro ao se desinscrever em meetup'));
   }
 }
+
+export function* GetSubscriptions() {
+  try {
+    const storage = JSON.parse(sessionStorage.getItem('@meetapp:user'));
+
+    const config = {
+      headers: { Authorization: `bearer ${storage.token}` },
+    };
+
+    const { data } = yield call(api.get, '/joinmeetup', config);
+    yield put(MeetupActions.MeetupSuccess(data));
+  } catch (error) {
+    yield put(MeetupActions.MeetupFailure('Erro ao buscar Meetups'));
+  }
+}
