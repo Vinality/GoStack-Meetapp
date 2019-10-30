@@ -1,13 +1,10 @@
 # GoStack-Meetapp
-
-This application was built as the final assignment of the GoStack 5 Bootcamp provided by Rocketseat. It consists of the following screens and features:
+Web application designed for people who want to organize and join meetups
 
 * Login Screen;
 * Signup Screen;
-* Theme preferences on first login;
 * Dashboard with all available meetups;
 * Individual Meetup page with details and subscribe button;
-* Recommended tab that shows all meetups matching the user's preferences;
 * Subscribed meetups page;
 * Profile page to update info.
 
@@ -22,12 +19,11 @@ Technologies used:
 ## Progress
 - [x] Login
 - [x] Signup
-- [x] First Access Page
-- [x] Profile Updating
+- [x] Profile Update
 - [x] New Meetup
-- [ ] Meetup Page
-- [ ] Subscribed Meetup List
-- [ ] Recommended Meetup List
+- [x] Dashboard
+- [x] Meetup Detail Page
+- [x] Subscribed Meetup List
 - [ ] Search for Meetup
 - [ ] Prop-Types Validation
 - [ ] Unit and Integration Tests
